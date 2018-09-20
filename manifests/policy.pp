@@ -1,0 +1,46 @@
+# == Class: placement::policy
+#
+# Configure the placement policies
+#
+# === Parameters
+#
+# [*policies*]
+#   (optional) Set of policies to configure for placement
+#   Example :
+#     {
+#       'placement-context_is_admin' => {
+#         'key' => 'context_is_admin',
+#         'value' => 'true'
+#       },
+#       'placement-default' => {
+#         'key' => 'default',
+#         'value' => 'rule:admin_or_owner'
+#       }
+#     }
+#   Defaults to empty hash.
+#
+# [*policy_path*]
+#   (optional) Path to the nova policy.json file
+#   Defaults to /etc/placement/policy.json
+#
+class placement::policy (
+  $policies    = {},
+  $policy_path = '/etc/placement/policy.json',
+) {
+
+  include ::placement::deps
+  include ::placement::params
+
+  validate_hash($policies)
+
+  Openstacklib::Policy::Base {
+    file_path  => $policy_path,
+    file_user  => 'root',
+    file_group => $::placement::params::group,
+  }
+
+  create_resources('openstacklib::policy::base', $policies)
+
+  oslo::policy { 'placement_config': policy_file => $policy_path }
+
+}

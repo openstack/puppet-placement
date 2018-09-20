@@ -1,0 +1,69 @@
+{
+    "author": "OpenStack Contributors",
+    "dependencies": [
+        {
+            "name": "puppetlabs/inifile",
+            "version_requirement": ">=2.0.0 <3.0.0"
+        },
+        {
+            "name": "puppetlabs/stdlib",
+            "version_requirement": ">=4.0.0 <5.0.0"
+        },
+        {
+            "name": "openstack/keystone",
+            "version_requirement": ">=11.0.0 <12.0.0"
+        },
+        {
+            "name": "openstack/openstacklib",
+            "version_requirement": ">=11.0.0 <12.0.0"
+        },
+        {
+            "name": "openstack/oslo",
+            "version_requirement": ">=11.0.0 <12.0.0"
+        },
+        {
+            "name": "puppetlabs/apache",
+            "version_requirement": ">=1.0.0 <2.0.0"
+        }
+    ],
+    "description": "Installs and configures OpenStack Placement.",
+    "issues_url": "https://bugs.launchpad.net/puppet-placement",
+    "license": "Apache-2.0",
+    "name": "openstack-placement",
+    "operatingsystem_support": [
+        {
+            "operatingsystem": "Debian",
+            "operatingsystemrelease": [
+                "9"
+            ]
+        },
+        {
+            "operatingsystem": "Fedora",
+            "operatingsystemrelease": [
+                "28"
+            ]
+        },
+        {
+            "operatingsystem": "RedHat",
+            "operatingsystemrelease": [
+                "7"
+            ]
+        },
+        {
+            "operatingsystem": "Ubuntu",
+            "operatingsystemrelease": [
+                "18.04"
+            ]
+        }
+    ],
+    "project_page": "https://launchpad.net/puppet-placement",
+    "requirements": [
+        {
+            "name": "puppet",
+            "version_requirement": "4.x"
+        }
+    ],
+    "source": "git://github.com/openstack/puppet-placement.git",
+    "summary": "Puppet module for OpenStack Placement",
+    "version": "14.0.0"
+}
