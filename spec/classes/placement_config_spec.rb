@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe 'placement::config' do
-
   let :default_params do
-    { :auth_type           => 'password',
+    {
+      :auth_type           => 'password',
       :project_name        => 'services',
       :project_domain_name => 'Default',
       :region_name      => 'RegionOne',
@@ -14,23 +14,24 @@ describe 'placement::config' do
   end
 
   let :params do
-    { :password => 's3cr3t' }
+    {
+      :password => 's3cr3t'
+    }
   end
 
   shared_examples 'placement::config' do
-
     context 'with required parameters' do
-      it 'configures [placement] parameters in placement.conf' do
-        is_expected.to contain_placement_config('placement/password').with_value(params[:password]).with_secret(true)
-        is_expected.to contain_placement_config('placement/auth_type').with_value(default_params[:auth_type])
-        is_expected.to contain_placement_config('placement/project_name').with_value(default_params[:project_name])
-        is_expected.to contain_placement_config('placement/project_domain_name').with_value(default_params[:project_domain_name])
-        is_expected.to contain_placement_config('placement/region_name').with_value(default_params[:region_name])
-        is_expected.to contain_placement_config('placement/valid_interfaces').with_value('<SERVICE DEFAULT>')
-        is_expected.to contain_placement_config('placement/username').with_value(default_params[:username])
-        is_expected.to contain_placement_config('placement/user_domain_name').with_value(default_params[:user_domain_name])
-        is_expected.to contain_placement_config('placement/auth_url').with_value(default_params[:auth_url])
-      end
+      it {
+        should contain_placement_config('placement/password').with_value(params[:password]).with_secret(true)
+        should contain_placement_config('placement/auth_type').with_value(default_params[:auth_type])
+        should contain_placement_config('placement/project_name').with_value(default_params[:project_name])
+        should contain_placement_config('placement/project_domain_name').with_value(default_params[:project_domain_name])
+        should contain_placement_config('placement/region_name').with_value(default_params[:region_name])
+        should contain_placement_config('placement/valid_interfaces').with_value('<SERVICE DEFAULT>')
+        should contain_placement_config('placement/username').with_value(default_params[:username])
+        should contain_placement_config('placement/user_domain_name').with_value(default_params[:user_domain_name])
+        should contain_placement_config('placement/auth_url').with_value(default_params[:auth_url])
+      }
     end
 
     context 'when overriding class parameters' do
@@ -47,17 +48,17 @@ describe 'placement::config' do
         )
       end
 
-      it 'configures [placement] parameters in placement.conf' do
-        is_expected.to contain_placement_config('placement/password').with_value(params[:password]).with_secret(true)
-        is_expected.to contain_placement_config('placement/auth_type').with_value(params[:auth_type])
-        is_expected.to contain_placement_config('placement/project_name').with_value(params[:project_name])
-        is_expected.to contain_placement_config('placement/project_domain_name').with_value(params[:project_domain_name])
-        is_expected.to contain_placement_config('placement/region_name').with_value(params[:region_name])
-        is_expected.to contain_placement_config('placement/valid_interfaces').with_value(params[:valid_interfaces])
-        is_expected.to contain_placement_config('placement/username').with_value(params[:username])
-        is_expected.to contain_placement_config('placement/user_domain_name').with_value(params[:user_domain_name])
-        is_expected.to contain_placement_config('placement/auth_url').with_value(params[:auth_url])
-      end
+      it {
+        should contain_placement_config('placement/password').with_value(params[:password]).with_secret(true)
+        should contain_placement_config('placement/auth_type').with_value(params[:auth_type])
+        should contain_placement_config('placement/project_name').with_value(params[:project_name])
+        should contain_placement_config('placement/project_domain_name').with_value(params[:project_domain_name])
+        should contain_placement_config('placement/region_name').with_value(params[:region_name])
+        should contain_placement_config('placement/valid_interfaces').with_value(params[:valid_interfaces])
+        should contain_placement_config('placement/username').with_value(params[:username])
+        should contain_placement_config('placement/user_domain_name').with_value(params[:user_domain_name])
+        should contain_placement_config('placement/auth_url').with_value(params[:auth_url])
+      }
     end
 
   end

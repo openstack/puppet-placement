@@ -5,22 +5,27 @@
 # === Parameters
 #
 # [*password*]
-#   (required) Password for placement user.
+#   (Required) Password for placement user.
 #
 # [*ensure*]
-#   (optional) Ensure state of keystone service identity. Defaults to 'present'.
+#   (Optional) Ensure state of keystone service identity.
+#   Defaults to 'present'.
 #
 # [*auth_name*]
-#   Username for placement service. Defaults to 'placement'.
+#   (Optional) Username for placement service.
+#   Defaults to 'placement'.
 #
 # [*email*]
-#   Email for placement user. Defaults to 'placement@localhost'.
+#   (Optional) Email for placement user.
+#   Defaults to 'placement@localhost'.
 #
 # [*tenant*]
-#   Tenant for placement user. Defaults to 'services'.
+#   (Optional) Tenant for placement user.
+#   Defaults to 'services'.
 #
 # [*configure_endpoint*]
-#   Should placement endpoint be configured? Defaults to 'true'.
+#   (Optional) Should placement endpoint be configured?
+#   Defaults to true.
 #
 # [*configure_user*]
 #   (Optional) Should the service user be configured?
@@ -31,29 +36,34 @@
 #   Defaults to 'true'.
 #
 # [*service_type*]
-#   Type of service. Defaults to 'placement'.
+#   (Optional) Type of service.
+#   Defaults to 'placement'.
 #
 # [*region*]
-#   Region for endpoint. Defaults to 'RegionOne'.
+#   (Optional) Region for endpoint.
+#   Defaults to 'RegionOne'.
 #
 # [*service_name*]
-#   (optional) Name of the service.
+#   (Optional) Name of the service.
 #   Defaults to the value of 'placement'.
 #
 # [*service_description*]
-#   (optional) Description of the service.
-#   Default to 'Placement Service'
+#   (Optional) Description of the service.
+#   Defaults to 'Placement Service'
 #
 # [*public_url*]
-#   (optional) The endpoint's public url. (Defaults to 'http://127.0.0.1/placement')
+#   (Optional) The endpoint's public url.
+#   Defaults to 'http://127.0.0.1/placement'
 #   This url should *not* contain any trailing '/'.
 #
 # [*admin_url*]
-#   (optional) The endpoint's admin url. (Defaults to 'http://127.0.0.1/placement')
+#   (Optional) The endpoint's admin url.
+#   Defaults to 'http://127.0.0.1/placement'
 #   This url should *not* contain any trailing '/'.
 #
 # [*internal_url*]
-#   (optional) The endpoint's internal url. (Defaults to 'http://127.0.0.1/placement')
+#   (Optional) The endpoint's internal url.
+#   Defaults to 'http://127.0.0.1/placement'
 #
 class placement::keystone::auth (
   $password,

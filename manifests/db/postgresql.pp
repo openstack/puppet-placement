@@ -16,21 +16,13 @@
 #   (Optional) User to connect to the database.
 #   Defaults to 'placement'.
 #
-#  [*encoding*]
-#    (Optional) The charset to use for the database.
-#    Default to undef.
+# [*encoding*]
+#   (Optional) The charset to use for the database.
+#   Default to undef.
 #
-#  [*privileges*]
-#    (Optional) Privileges given to the database user.
-#    Default to 'ALL'
-#
-# == Dependencies
-#
-# == Examples
-#
-# == Authors
-#
-# == Copyright
+# [*privileges*]
+#   (Optional) Privileges given to the database user.
+#   Default to 'ALL'
 #
 class placement::db::postgresql(
   $password,

@@ -3,13 +3,14 @@
 class placement::params {
 
   include ::placement::deps
-
   include ::openstacklib::defaults
+
   if ($::os_package_type == 'debian') or ($::operatingsystem == 'Fedora') {
     $pyvers = '3'
   } else {
     $pyvers = '2'
   }
+
   $group = 'placement'
 
   case $::osfamily {
@@ -25,7 +26,6 @@ class placement::params {
       $wsgi_script_source  = '/usr/bin/placement-api'
       $wsgi_script_path    = '/var/www/cgi-bin/placement'
       $httpd_config_file   = '/etc/httpd/conf.d/00-placement-api.conf'
-
     }
     'Debian': {
       $package_name        = 'placement-api'

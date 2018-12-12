@@ -5,7 +5,7 @@
 # === Parameters
 #
 # [*ensure_package*]
-#   (optional) The state of nova packages
+#   (Optional) The state of nova packages
 #   Defaults to 'present'
 #
 # [*sync_db*]
@@ -13,9 +13,8 @@
 #   Defaults to true
 
 class placement(
-  $ensure_package                       = 'present',
-  $sync_db                              = true,
-
+  $ensure_package = 'present',
+  $sync_db        = true,
 ) inherits placement::params {
 
   include ::placement::deps

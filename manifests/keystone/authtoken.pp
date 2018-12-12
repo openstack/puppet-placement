@@ -232,4 +232,3 @@ class placement::keystone::authtoken(
     token_cache_time               => $token_cache_time,
   }
 }
-

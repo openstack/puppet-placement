@@ -33,15 +33,6 @@
 #   Only used with mysql modules >= 2.2.
 #   Defaults to 'utf8_general_ci'
 #
-# == Dependencies
-#   Class['mysql::server']
-#
-# == Examples
-#
-# == Authors
-#
-# == Copyright
-#
 class placement::db::mysql(
   $password,
   $dbname        = 'placement',

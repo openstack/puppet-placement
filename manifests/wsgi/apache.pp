@@ -22,55 +22,55 @@
 #
 # == Parameters
 #
-#   [*servername*]
-#     The servername for the virtualhost.
-#     Optional. Defaults to $::fqdn
+# [*servername*]
+#   (Optional) The servername for the virtualhost.
+#   Defaults to $::fqdn
 #
-#   [*api_port*]
-#     The port for Placement API service.
-#     Optional. Defaults to 80
+# [*api_port*]
+#   (Optional) The port for Placement API service.
+#   Defaults to 80
 #
-#   [*bind_host*]
-#     The host/ip address Apache will listen on.
-#     Optional. Defaults to undef (listen on all ip addresses).
+# [*bind_host*]
+#   (Optional) The host/ip address Apache will listen on.
+#   Defaults to undef (listen on all ip addresses).
 #
-#   [*path*]
-#     The prefix for the endpoint.
-#     Optional. Defaults to '/placement'
+# [*path*]
+#   (Optional) The prefix for the endpoint.
+#   Defaults to '/placement'
 #
-#   [*ssl*]
-#     Use ssl ? (boolean)
-#     Optional. Defaults to true
+# [*ssl*]
+#   (Optional) Use ssl ? (boolean)
+#   Defaults to true
 #
-#   [*workers*]
-#     Number of WSGI workers to spawn.
-#     Optional. Defaults to 1
+# [*workers*]
+#   (Optional) Number of WSGI workers to spawn.
+#   Defaults to 1
 #
-#   [*priority*]
-#     (optional) The priority for the vhost.
-#     Defaults to '10'
+# [*priority*]
+#   (Optional) The priority for the vhost.
+#   Defaults to '10'
 #
-#   [*threads*]
-#     (optional) The number of threads for the vhost.
-#     Defaults to $::os_workers
+# [*threads*]
+#   (Optional) The number of threads for the vhost.
+#   Defaults to $::os_workers
 #
-#   [*wsgi_process_display_name*]
-#     (optional) Name of the WSGI process display-name.
-#     Defaults to undef
+# [*wsgi_process_display_name*]
+#   (Optional) Name of the WSGI process display-name.
+#   Defaults to undef
 #
-#   [*ensure_package*]
-#     (optional) Control the ensure parameter for the Placement API package ressource.
-#     Defaults to 'present'
+# [*ensure_package*]
+#   (Optional) Control the ensure parameter for the Placement API package ressource.
+#   Defaults to 'present'
 #
-#   [*ssl_cert*]
-#   [*ssl_key*]
-#   [*ssl_chain*]
-#   [*ssl_ca*]
-#   [*ssl_crl_path*]
-#   [*ssl_crl*]
-#   [*ssl_certs_dir*]
-#     apache::vhost ssl parameters.
-#     Optional. Default to apache::vhost 'ssl_*' defaults.
+# [*ssl_cert*]
+# [*ssl_key*]
+# [*ssl_chain*]
+# [*ssl_ca*]
+# [*ssl_crl_path*]
+# [*ssl_crl*]
+# [*ssl_certs_dir*]
+#   (Optional) apache::vhost ssl parameters.
+#   Default to apache::vhost 'ssl_*' defaults.
 #
 # == Examples
 #
@@ -79,23 +79,23 @@
 #   class { 'placement::wsgi::apache': }
 #
 class placement::wsgi::apache (
-  $servername                 = $::fqdn,
-  $api_port                   = 80,
-  $bind_host                  = undef,
-  $path                       = '/placement',
-  $ssl                        = true,
-  $workers                    = 1,
-  $ssl_cert                   = undef,
-  $ssl_key                    = undef,
-  $ssl_chain                  = undef,
-  $ssl_ca                     = undef,
-  $ssl_crl_path               = undef,
-  $ssl_crl                    = undef,
-  $ssl_certs_dir              = undef,
-  $wsgi_process_display_name  = undef,
-  $threads                    = $::os_workers,
-  $priority                   = '10',
-  $ensure_package             = 'present',
+  $servername                = $::fqdn,
+  $api_port                  = 80,
+  $bind_host                 = undef,
+  $path                      = '/placement',
+  $ssl                       = true,
+  $workers                   = 1,
+  $ssl_cert                  = undef,
+  $ssl_key                   = undef,
+  $ssl_chain                 = undef,
+  $ssl_ca                    = undef,
+  $ssl_crl_path              = undef,
+  $ssl_crl                   = undef,
+  $ssl_certs_dir             = undef,
+  $wsgi_process_display_name = undef,
+  $threads                   = $::os_workers,
+  $priority                  = '10',
+  $ensure_package            = 'present',
 ) {
 
   include ::placement::params

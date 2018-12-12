@@ -5,45 +5,45 @@
 # === Parameters
 #
 # [*password*]
-#   (required) Password for connecting to Nova Placement API service in
+#   (Required) Password for connecting to Nova Placement API service in
 #   admin context through the OpenStack Identity service.
 #
 # [*auth_type*]
-#   Name of the auth type to load (string value)
+#   (Optional) Name of the auth type to load.
 #   Defaults to 'password'
 #
 # [*project_name*]
-#   (optional) Project name for connecting to Nova Placement API service in
+#   (Optional) Project name for connecting to Nova Placement API service in
 #   admin context through the OpenStack Identity service.
 #   Defaults to 'services'
 #
 # [*project_domain_name*]
-#   (optional) Project Domain name for connecting to Nova Placement API service in
+#   (Optional) Project Domain name for connecting to Nova Placement API service in
 #   admin context through the OpenStack Identity service.
 #   Defaults to 'Default'
 #
 # [*user_domain_name*]
-#   (optional) User Domain name for connecting to Nova Placement API service in
+#   (Optional) User Domain name for connecting to Nova Placement API service in
 #   admin context through the OpenStack Identity service.
 #   Defaults to 'Default'
 #
 # [*region_name*]
-#   (optional) Region name for connecting to Nova Placement API service in admin context
+#   (Optional) Region name for connecting to Nova Placement API service in admin context
 #   through the OpenStack Identity service.
 #   Defaults to 'RegionOne'
 #
 # [*valid_interfaces*]
-#   (optional) Interface names used for getting the keystone endpoint for
+#   (Optional) Interface names used for getting the keystone endpoint for
 #   the placement API. Comma separated if multiple.
 #   Defaults to $::os_service_default
 #
 # [*username*]
-#   (optional) Username for connecting to Nova Placement API service in admin context
+#   (Optional) Username for connecting to Nova Placement API service in admin context
 #   through the OpenStack Identity service.
 #   Defaults to 'placement'
 #
 # [*auth_url*]
-#   (optional) Points to the OpenStack Identity server IP and port.
+#   (Optional) Points to the OpenStack Identity server IP and port.
 #   This is the Identity (keystone) admin API server IP and port value,
 #   and not the Identity service API IP and port.
 #   Defaults to 'http://127.0.0.1:5000/v3'

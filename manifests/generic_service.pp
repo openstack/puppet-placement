@@ -13,21 +13,21 @@
 # === Parameters:
 #
 # [*package_name*]
-#   (mandatory) The package name (for the generic_service)
+#   (Required) The package name (for the generic_service)
 #
 # [*service_name*]
-#   (mandatory) The service name (for the generic_service)
+#   (Required) The service name (for the generic_service)
 #
 # [*enabled*]
-#   (optional) Define if the service must be enabled or not
+#   (Optional) Define if the service must be enabled or not
 #   Defaults to false.
 #
 # [*manage_service*]
-#   (optional) Manage or not the service (if a service_name is provided).
+#   (Optional) Manage or not the service (if a service_name is provided).
 #   Defaults to true.
 #
 # [*ensure_package*]
-#   (optional) Control the ensure parameter for the package resource.
+#   (Optional) Control the ensure parameter for the package resource.
 #   Defaults to 'present'.
 #
 define placement::generic_service(
