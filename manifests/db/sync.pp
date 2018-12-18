@@ -6,7 +6,7 @@ class placement::db::sync {
   include ::placement::deps
 
   exec { 'placement-manage-db-sync':
-    command     => "placement-manage db sync",
+    command     => 'placement-manage db sync',
     path        => ['/bin', '/usr/bin', '/usr/local/bin'],
     user        => 'placement',
     refreshonly => true,

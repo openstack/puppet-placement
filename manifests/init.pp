@@ -24,9 +24,9 @@ class placement(
   }
 
   package { 'python-placement':
-    ensure  => $ensure_package,
-    name    => $::placement::params::python_package_name,
-    tag     => ['openstack', 'placement-package'],
+    ensure => $ensure_package,
+    name   => $::placement::params::python_package_name,
+    tag    => ['openstack', 'placement-package'],
   }
 
   package { 'placement-common':

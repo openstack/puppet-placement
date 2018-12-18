@@ -122,9 +122,9 @@ class placement::wsgi::apache (
   }
   # Ubuntu requires placement-api to be installed before apache to find wsgi script
   Package<| title == 'placement-api'|> -> Package<| title == 'httpd'|>
-  Package<| title == 'placement-api' |> ->
-    File[$::placement::params::httpd_config_file] ~>
-      Service['httpd']
+  Package<| title == 'placement-api' |>
+    -> File[$::placement::params::httpd_config_file]
+    ~> Service['httpd']
 
   Service <| title == 'httpd' |> { tag +> 'placement-service' }
 
