@@ -34,8 +34,6 @@ class placement::db::postgresql(
 
   include ::placement::deps
 
-  Class['placement::db::postgresql'] -> Service<| title == 'placement' |>
-
   ::openstacklib::db::postgresql { 'placement':
     password_hash => postgresql_password($user, $password),
     dbname        => $dbname,
