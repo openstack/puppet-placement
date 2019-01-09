@@ -72,6 +72,18 @@
 #   (Optional) apache::vhost ssl parameters.
 #   Default to apache::vhost 'ssl_*' defaults.
 #
+# [*access_log_file*]
+#   (Optional) The log file name for the virtualhost.
+#   Defaults to false
+#
+# [*access_log_format*]
+#   (Optional) The log format for the virtualhost.
+#   Defaults to false
+#
+# [*error_log_file*]
+#   (Optional) The error log file name for the virtualhost.
+#   Defaults to undef
+#
 # == Examples
 #
 #   include apache
@@ -85,6 +97,10 @@ class placement::wsgi::apache (
   $path                      = '/placement',
   $ssl                       = true,
   $workers                   = 1,
+  $priority                  = '10',
+  $threads                   = $::os_workers,
+  $wsgi_process_display_name = undef,
+  $ensure_package            = 'present',
   $ssl_cert                  = undef,
   $ssl_key                   = undef,
   $ssl_chain                 = undef,
@@ -92,10 +108,9 @@ class placement::wsgi::apache (
   $ssl_crl_path              = undef,
   $ssl_crl                   = undef,
   $ssl_certs_dir             = undef,
-  $wsgi_process_display_name = undef,
-  $threads                   = $::os_workers,
-  $priority                  = '10',
-  $ensure_package            = 'present',
+  $access_log_file           = false,
+  $access_log_format         = false,
+  $error_log_file            = undef,
 ) {
 
   include ::placement::params
@@ -152,6 +167,9 @@ class placement::wsgi::apache (
     wsgi_script_dir           => $::placement::params::wsgi_script_path,
     wsgi_script_file          => 'placement-api',
     wsgi_script_source        => $::placement::params::wsgi_script_source,
+    access_log_file           => $access_log_file,
+    access_log_format         => $access_log_format,
+    error_log_file            => $error_log_file,
   }
 
 }
