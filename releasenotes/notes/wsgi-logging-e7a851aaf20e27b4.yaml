@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Added access_log_file, access_log_format and error_log_file parameters
+    to the placement::wsgi::apache class.
