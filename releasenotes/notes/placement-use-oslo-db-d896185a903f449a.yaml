@@ -1,0 +1,16 @@
+---
+features:
+  - |
+    Added the following parameters to placement::db, it now also uses the
+    oslo::db resource to create the databaes configuration:
+
+      - ``database_sqlite_synchronous``
+      - ``database_slave_connection``
+      - ``database_mysql_sql_mode``
+      - ``database_max_pool_size``
+      - ``database_max_retries``
+      - ``database_retry_interval``
+      - ``database_max_overflow``
+      - ``database_connection_debug``
+      - ``database_connection_trace``
+      - ``database_pool_timeout``
