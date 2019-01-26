@@ -9,7 +9,8 @@
 #   Defaults to 'placement'
 #
 # [*password*]
-#   (Required) Password to create for the service user
+#   (Optional) Password to create for the service user
+#   Defaults to $::os_service_default.
 #
 # [*auth_url*]
 #   (Optional) The URL to use for authentication.
@@ -161,8 +162,8 @@
 #   Defaults to $::os_service_default.
 #
 class placement::keystone::authtoken(
-  $password,
   $username                       = 'placement',
+  $password                       = $::os_service_default,
   $auth_url                       = 'http://localhost:5000',
   $project_name                   = 'services',
   $user_domain_name               = 'Default',
