@@ -5,10 +5,10 @@ class placement::params {
   include ::placement::deps
   include ::openstacklib::defaults
 
-  if ($::os_package_type == 'debian') or ($::operatingsystem == 'Fedora') {
-    $pyvers = '3'
-  } else {
-    $pyvers = '2'
+  $pyvers = $::openstacklib::defaults::pyvers
+  $pyvers_real = $pyvers ? {
+    '' => '2',
+    default => $pyvers
   }
 
   $group = 'placement'
@@ -18,7 +18,7 @@ class placement::params {
       # package names
       $package_name        = 'openstack-placement-api'
       $common_package_name = 'openstack-placement-common'
-      $python_package_name = "python${pyvers}-placement"
+      $python_package_name = "python${pyvers_real}-placement"
       $service_name        = 'httpd'
       $public_url          = 'http://127.0.0.1/placement'
       $internal_url        = 'http://127.0.0.1/placement'
@@ -30,7 +30,7 @@ class placement::params {
     'Debian': {
       $package_name        = 'placement-api'
       $common_package_name = 'placement-common'
-      $python_package_name = "python${pyvers}-placement"
+      $python_package_name = "python${pyvers_real}-placement"
       $service_name        = 'placement-api'
       $public_url          = 'http://127.0.0.1'
       $internal_url        = 'http://127.0.0.1'
