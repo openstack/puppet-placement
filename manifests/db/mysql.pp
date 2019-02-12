@@ -49,7 +49,7 @@ class placement::db::mysql(
 
   ::openstacklib::db::mysql { 'placement':
     user          => $user,
-    password_hash => mysql_password($password),
+    password_hash => mysql::password($password),
     dbname        => $dbname,
     host          => $host,
     charset       => $charset,
