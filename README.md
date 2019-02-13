@@ -30,7 +30,7 @@ Setup
 
 **What the placement module affects**
 
-* [Placement](https://wiki.openstack.org/wiki/Placement), the placement service for OpenStack.
+* [Placement](https://docs.openstack.org/placement/latest/), the placement service for OpenStack.
 
 ### Installing placement
 
