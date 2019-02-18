@@ -2,15 +2,14 @@ require 'spec_helper'
 
 describe 'placement::keystone::authtoken' do
   let :params do
-    {
-    }
+    { :password => 'placement_password', }
   end
 
   shared_examples 'placement::keystone::authtoken' do
     context 'with default parameters' do
       it {
         is_expected.to contain_placement_config('keystone_authtoken/username').with_value('placement')
-        is_expected.to contain_placement_config('keystone_authtoken/password').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_placement_config('keystone_authtoken/password').with_value('placement_password')
         is_expected.to contain_placement_config('keystone_authtoken/auth_url').with_value('http://localhost:5000')
         is_expected.to contain_placement_config('keystone_authtoken/project_name').with_value('services')
         is_expected.to contain_placement_config('keystone_authtoken/user_domain_name').with_value('Default')

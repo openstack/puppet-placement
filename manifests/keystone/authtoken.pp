@@ -198,6 +198,10 @@ class placement::keystone::authtoken(
 
   include ::placement::deps
 
+  if is_service_default($password) {
+    fail('Please set password for Placement service user')
+  }
+
   keystone::resource::authtoken { 'placement_config':
     username                       => $username,
     password                       => $password,
