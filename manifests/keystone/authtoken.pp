@@ -161,6 +161,12 @@
 #   (in seconds). Set to -1 to disable caching completely. Integer value
 #   Defaults to $::os_service_default.
 #
+# [*service_token_roles_required*]
+#   (optional) backwards compatibility to ensure that the service tokens are
+#   compared against a list of possible roles for validity
+#   true/false
+#   Defaults to $::os_service_default.
+#
 class placement::keystone::authtoken(
   $username                       = 'placement',
   $password                       = $::os_service_default,
@@ -194,6 +200,7 @@ class placement::keystone::authtoken(
   $manage_memcache_package        = false,
   $region_name                    = $::os_service_default,
   $token_cache_time               = $::os_service_default,
+  $service_token_roles_required   = $::os_service_default,
 ) {
 
   include ::placement::deps
@@ -235,5 +242,6 @@ class placement::keystone::authtoken(
     manage_memcache_package        => $manage_memcache_package,
     region_name                    => $region_name,
     token_cache_time               => $token_cache_time,
+    service_token_roles_required   => $service_token_roles_required,
   }
 }
