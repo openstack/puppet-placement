@@ -31,7 +31,7 @@ class placement::policy (
   include ::placement::deps
   include ::placement::params
 
-  validate_hash($policies)
+  validate_legacy(Hash, 'validate_hash', $policies)
 
   Openstacklib::Policy::Base {
     file_path  => $policy_path,

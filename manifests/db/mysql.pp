@@ -45,7 +45,7 @@ class placement::db::mysql(
 
   include ::placement::deps
 
-  validate_string($password)
+  validate_legacy(String, 'validate_string', $password)
 
   ::openstacklib::db::mysql { 'placement':
     user          => $user,
