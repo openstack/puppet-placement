@@ -36,7 +36,7 @@ class placement::params {
       $internal_url        = 'http://127.0.0.1'
       $admin_url           = 'http://127.0.0.1'
       $wsgi_script_source  = '/usr/bin/placement-api'
-      $wsgi_script_path    = '/var/www/cgi-bin/placement'
+      $wsgi_script_path    = '/usr/lib/cgi-bin/placement'
       $httpd_config_file   = '/etc/apache2/sites-available/nova-placement-api.conf'
     }
     default: {
