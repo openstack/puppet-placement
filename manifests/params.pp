@@ -31,7 +31,14 @@ class placement::params {
       $package_name        = 'placement-api'
       $common_package_name = 'placement-common'
       $python_package_name = "python${pyvers_real}-placement"
-      $service_name        = 'placement-api'
+      case $::os_package_type {
+        'debian': {
+          $service_name    = 'placement-api'
+        }
+        default: {
+          $service_name    = 'httpd'
+        }
+      }
       $public_url          = 'http://127.0.0.1'
       $internal_url        = 'http://127.0.0.1'
       $admin_url           = 'http://127.0.0.1'
