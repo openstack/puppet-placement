@@ -48,6 +48,22 @@
 #   and not the Identity service API IP and port.
 #   Defaults to 'http://127.0.0.1:5000/v3'
 #
+# [*placement_config*]
+#   (optional) Allow configuration of arbitrary Placement configurations.
+#   The value is an hash of placement_config resources. Example:
+#   { 'DEFAULT/foo' => { value => 'fooValue'},
+#     'DEFAULT/bar' => { value => 'barValue'}
+#   }
+#   In yaml format, Example:
+#   placement_config:
+#     DEFAULT/foo:
+#       value: fooValue
+#     DEFAULT/bar:
+#       value: barValue
+#
+#   NOTE: The configuration MUST NOT be already handled by this module
+#   or Puppet catalog compilation will fail with duplicate resources.
+#
 class placement::config(
   $password            = false,
   $auth_type           = 'password',
@@ -58,20 +74,27 @@ class placement::config(
   $project_name        = 'services',
   $user_domain_name    = 'Default',
   $username            = 'placement',
+  $placement_config    = {},
 ) {
 
   include ::placement::deps
 
-  placement_config {
-    'placement/auth_type':           value => $auth_type;
-    'placement/auth_url':            value => $auth_url;
-    'placement/password':            value => $password, secret => true;
-    'placement/project_domain_name': value => $project_domain_name;
-    'placement/project_name':        value => $project_name;
-    'placement/user_domain_name':    value => $user_domain_name;
-    'placement/username':            value => $username;
-    'placement/region_name':         value => $region_name;
-    'placement/valid_interfaces':    value => $valid_interfaces;
+  $default_parameters = {
+    'placement/auth_type'            => { value => $auth_type},
+    'placement/auth_url'             => { value => $auth_url},
+    'placement/password'             => { value => $password, secret => true},
+    'placement/project_domain_name'  => { value => $project_domain_name},
+    'placement/project_name'         => { value => $project_name},
+    'placement/user_domain_name'     => { value => $user_domain_name},
+    'placement/username'             => { value => $username},
+    'placement/region_name'          => { value => $region_name},
+    'placement/valid_interfaces'     => { value => $valid_interfaces},
   }
+
+  validate_legacy(Hash, 'validate_hash', $default_parameters)
+  validate_legacy(Hash, 'validate_hash', $placement_config)
+  $placement_parameters = merge($default_parameters, $placement_config)
+
+  create_resources('placement_config', $placement_parameters)
 
 }
