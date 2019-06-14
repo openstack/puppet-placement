@@ -1,0 +1,7 @@
+---
+deprecations:
+  - |
+    The parameters password, auth_type, auth_url, region_name, valid_interfaces,
+    project_domain_name, project_name, user_domain_name, username in placement::config
+    is deprecated and has no effect. They were leftovers from the puppet-nova extraction
+    and should not be set in the placement section of placement's configuration file.
