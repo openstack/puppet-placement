@@ -11,10 +11,16 @@
 # [*sync_db*]
 #   (Optional) Run db sync on the node.
 #   Defaults to true
-
+#
+# [*randomize_allocation_candidates*]
+#   (Optional) Randomize the results of the returned
+#   allocation candidates.
+#   Defaults to $::os_service_default
+#
 class placement(
-  $ensure_package = 'present',
-  $sync_db        = true,
+  $ensure_package                  = 'present',
+  $sync_db                         = true,
+  $randomize_allocation_candidates = $::os_service_default,
 ) inherits placement::params {
 
   include ::placement::deps
@@ -36,4 +42,7 @@ class placement(
     tag     => ['openstack', 'placement-package'],
   }
 
+  placement_config {
+    'placement/randomize_allocation_candidates': value => $randomize_allocation_candidates;
+  }
 }

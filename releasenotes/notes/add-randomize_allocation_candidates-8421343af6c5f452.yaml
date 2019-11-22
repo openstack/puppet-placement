@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Added placement::randomize_allocation_candidates parameter.

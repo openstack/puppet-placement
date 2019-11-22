@@ -20,13 +20,16 @@ describe 'placement' do
         :require => 'Package[python-placement]',
         :tag     => ['openstack', 'placement-package'],
       )}
+
+      it { should contain_placement_config('placement/randomize_allocation_candidates').with_value('<SERVICE DEFAULT>') }
     end
 
     context 'with overridden parameters' do
       let :params do
         {
-          :ensure_package => 'absent',
-          :sync_db        => false,
+          :ensure_package                  => 'absent',
+          :sync_db                         => false,
+          :randomize_allocation_candidates => true,
         }
       end
 
@@ -47,6 +50,8 @@ describe 'placement' do
         :require => 'Package[python-placement]',
         :tag     => ['openstack', 'placement-package'],
       )}
+
+      it { should contain_placement_config('placement/randomize_allocation_candidates').with_value(true) }
     end
   end
 
