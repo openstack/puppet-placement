@@ -28,8 +28,8 @@ class placement::policy (
   $policy_path = '/etc/placement/policy.json',
 ) {
 
-  include ::placement::deps
-  include ::placement::params
+  include placement::deps
+  include placement::params
 
   validate_legacy(Hash, 'validate_hash', $policies)
 

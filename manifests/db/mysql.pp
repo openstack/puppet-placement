@@ -43,7 +43,7 @@ class placement::db::mysql(
   $allowed_hosts = undef
 ) {
 
-  include ::placement::deps
+  include placement::deps
 
   validate_legacy(String, 'validate_string', $password)
 

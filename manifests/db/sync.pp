@@ -3,7 +3,7 @@
 #
 class placement::db::sync {
 
-  include ::placement::deps
+  include placement::deps
 
   exec { 'placement-manage-db-sync':
     command     => 'placement-manage db sync',

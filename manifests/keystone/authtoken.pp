@@ -220,7 +220,7 @@ class placement::keystone::authtoken(
   $interface                      = $::os_service_default,
 ) {
 
-  include ::placement::deps
+  include placement::deps
 
   if is_service_default($password) {
     fail('Please set password for Placement service user')

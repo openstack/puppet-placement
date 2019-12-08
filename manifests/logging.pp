@@ -123,7 +123,7 @@ class placement::logging(
   $log_date_format               = $::os_service_default,
 ) {
 
-  include ::placement::deps
+  include placement::deps
 
   oslo::log { 'placement_config':
     use_stderr                    => $use_stderr,

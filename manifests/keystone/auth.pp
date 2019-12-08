@@ -83,7 +83,7 @@ class placement::keystone::auth (
   $internal_url        = 'http://127.0.0.1/placement',
 ) {
 
-  include ::placement::deps
+  include placement::deps
 
   if $configure_user_role {
     Keystone_user_role["${auth_name}@${tenant}"] ~> Service <| name == 'placement-server' |>

@@ -2,8 +2,8 @@
 #
 class placement::params {
 
-  include ::placement::deps
-  include ::openstacklib::defaults
+  include placement::deps
+  include openstacklib::defaults
 
   $pyvers = $::openstacklib::defaults::pyvers
   $pyvers_real = $pyvers ? {

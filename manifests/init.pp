@@ -23,10 +23,10 @@ class placement(
   $randomize_allocation_candidates = $::os_service_default,
 ) inherits placement::params {
 
-  include ::placement::deps
+  include placement::deps
 
   if $sync_db {
-    include ::placement::db::sync
+    include placement::db::sync
   }
 
   package { 'python-placement':

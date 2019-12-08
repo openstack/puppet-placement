@@ -63,8 +63,8 @@ class placement::db (
   $database_pool_timeout       = $::os_service_default,
 ) {
 
-  include ::placement::deps
-  include ::placement::config
+  include placement::deps
+  include placement::config
 
   validate_legacy(Oslo::Dbconn, 'validate_re', $database_connection,
     ['^(sqlite|mysql(\+pymysql)?|postgresql):\/\/(\S+:\S+@\S+\/\S+)?'])

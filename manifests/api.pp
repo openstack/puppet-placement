@@ -45,7 +45,7 @@ class placement::api (
   $sync_db                        = false,
 ) inherits placement::params {
 
-  include ::placement::deps
+  include placement::deps
 
   package { 'placement-api':
     ensure => $package_ensure,
@@ -69,7 +69,7 @@ class placement::api (
         tag        => ['placement-service', 'placement-db-sync-service'],
       }
     } elsif $api_service_name == 'httpd' {
-      include ::apache::params
+      include apache::params
       service { 'placement-api':
         ensure => 'stopped',
         name   => $::placement::params::service_name,
@@ -81,6 +81,6 @@ class placement::api (
     }
   }
   if $sync_db {
-    include ::placement::db::sync
+    include placement::db::sync
   }
 }

@@ -81,7 +81,7 @@ class placement::config(
   $username            = undef,
 ) {
 
-  include ::placement::deps
+  include placement::deps
 
   # TODO(tobias-urdin): Remove these deprecated ones in U release.
   $default_parameters = {

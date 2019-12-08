@@ -113,11 +113,11 @@ class placement::wsgi::apache (
   $error_log_file            = undef,
 ) {
 
-  include ::placement::params
-  include ::apache
-  include ::apache::mod::wsgi
+  include placement::params
+  include apache
+  include apache::mod::wsgi
   if $ssl {
-    include ::apache::mod::ssl
+    include apache::mod::ssl
   }
 
   placement::generic_service { 'api':

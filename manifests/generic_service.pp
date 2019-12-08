@@ -38,8 +38,8 @@ define placement::generic_service(
   $ensure_package = 'present'
 ) {
 
-  include ::placement::deps
-  include ::placement::params
+  include placement::deps
+  include placement::params
 
   $placement_title = "placement-${name}"
 

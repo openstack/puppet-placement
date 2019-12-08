@@ -32,7 +32,7 @@ class placement::db::postgresql(
   $privileges = 'ALL',
 ) {
 
-  include ::placement::deps
+  include placement::deps
 
   ::openstacklib::db::postgresql { 'placement':
     password_hash => postgresql_password($user, $password),
