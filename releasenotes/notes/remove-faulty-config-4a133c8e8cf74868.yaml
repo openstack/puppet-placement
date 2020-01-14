@@ -1,0 +1,7 @@
+---
+upgrade:
+  - |
+    The parameter password, auth_type, auth_url, region_name, valid_interfaces,
+    project_domain_name, project_name, user_domain_name and username in the
+    placement::config class is removed. This was faulty parameters that was
+    leftovers from when placement was extracted out of the nova module.
