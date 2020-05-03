@@ -1,5 +1,6 @@
 require 'puppet'
 require 'puppet/type/placement_config'
+
 describe 'Puppet::Type.type(:placement_config)' do
   before :each do
     @placement_config = Puppet::Type.type(:placement_config).new(:name => 'DEFAULT/foo', :value => 'bar')
@@ -52,12 +53,12 @@ describe 'Puppet::Type.type(:placement_config)' do
 
   it 'should autorequire the package that install the file' do
     catalog = Puppet::Resource::Catalog.new
-    package = Puppet::Type.type(:package).new(:name => 'placement')
-    catalog.add_resource package, @placement_config
+    anchor = Puppet::Type.type(:anchor).new(:name => 'placement::install::end')
+    catalog.add_resource anchor, @placement_config
     dependency = @placement_config.autorequire
     expect(dependency.size).to eq(1)
     expect(dependency[0].target).to eq(@placement_config)
-    expect(dependency[0].source).to eq(package)
+    expect(dependency[0].source).to eq(anchor)
   end
 
 
