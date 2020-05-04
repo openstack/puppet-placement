@@ -46,8 +46,8 @@ Puppet::Type.newtype(:placement_config) do
     defaultto('<SERVICE DEFAULT>')
   end
 
-  autorequire(:package) do
-    'placement'
+  autorequire(:anchor) do
+    ['placement::install::end']
   end
 
 end
