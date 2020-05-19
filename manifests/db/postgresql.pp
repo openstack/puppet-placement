@@ -35,11 +35,11 @@ class placement::db::postgresql(
   include placement::deps
 
   ::openstacklib::db::postgresql { 'placement':
-    password_hash => postgresql_password($user, $password),
-    dbname        => $dbname,
-    user          => $user,
-    encoding      => $encoding,
-    privileges    => $privileges,
+    password   => $password,
+    dbname     => $dbname,
+    user       => $user,
+    encoding   => $encoding,
+    privileges => $privileges,
   }
 
   Anchor['placement::db::begin']

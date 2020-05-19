@@ -7,15 +7,18 @@ describe 'placement::db::postgresql' do
 
   let :params do
     {
-      :password => 'pw'
+      :password => 'placementpass'
     }
   end
 
   shared_examples 'placement::db::postgresql' do
     context 'with only required parameters' do
-      it { should contain_postgresql__server__db('placement').with(
-        :user     => 'placement',
-        :password => 'md51c1dd6fb4863b046eecc6a6b91f53f7f'
+      it { is_expected.to contain_openstacklib__db__postgresql('placement').with(
+        :user       => 'placement',
+        :password   => 'placementpass',
+        :dbname     => 'placement',
+        :encoding   => nil,
+        :privileges => 'ALL',
       )}
     end
   end
