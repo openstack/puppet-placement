@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Support for allocation_conflict_retry_count parameter has been added. Use
+    ``placement::allocation_conflict_retry_count`` to set the parameter.

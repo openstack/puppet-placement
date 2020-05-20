@@ -17,10 +17,16 @@
 #   allocation candidates.
 #   Defaults to $::os_service_default
 #
+# [*allocation_conflict_retry_count*]
+#   (Optional) The number of retries when confliction is detected in concurrent
+#   allocations.
+#   Defaults to $::os_service_default
+#
 class placement(
   $ensure_package                  = 'present',
   $sync_db                         = true,
   $randomize_allocation_candidates = $::os_service_default,
+  $allocation_conflict_retry_count = $::os_service_default,
 ) inherits placement::params {
 
   include placement::deps
@@ -44,5 +50,6 @@ class placement(
 
   placement_config {
     'placement/randomize_allocation_candidates': value => $randomize_allocation_candidates;
+    'placement/allocation_conflict_retry_count': value => $allocation_conflict_retry_count;
   }
 }
