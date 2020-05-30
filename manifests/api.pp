@@ -49,7 +49,7 @@ class placement::api (
 
   package { 'placement-api':
     ensure => $package_ensure,
-    name   => $::placement::params::api_package_name,
+    name   => $::placement::params::package_name,
     tag    => ['openstack', 'placement-package'],
   }
 
