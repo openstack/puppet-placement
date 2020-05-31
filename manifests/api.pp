@@ -36,50 +36,49 @@
 #   Defaults to false
 #
 class placement::api (
-  $enabled                        = true,
-  $manage_service                 = true,
-  $api_service_name               = $::placement::params::service_name,
-  $host                           = '0.0.0.0',
-  $port                           = '8778',
-  $package_ensure                 = 'present',
-  $sync_db                        = false,
+  $enabled          = true,
+  $manage_service   = true,
+  $api_service_name = $::placement::params::service_name,
+  $host             = '0.0.0.0',
+  $port             = '8778',
+  $package_ensure   = 'present',
+  $sync_db          = false,
 ) inherits placement::params {
 
   include ::placement::deps
 
-  package { 'placement-api':
-    ensure => $package_ensure,
-    name   => $::placement::params::package_name,
-    tag    => ['openstack', 'placement-package'],
+  if $manage_service {
+    if $api_service_name == 'httpd' {
+      # The following logic is currently required only in Debian, because
+      # the other distributions don't provide an independent service for
+      # placement
+      if $::placement::params::service_name {
+        service { 'placement-api':
+          ensure => 'stopped',
+          name   => $::placement::params::service_name,
+          enable => false,
+          tag    => ['placement-service'],
+        }
+        Service['placement-api'] -> Service[$api_service_name]
+      }
+      $api_service_name_real = false
+    } else {
+      $api_service_name_real = $api_service_name
+    }
+
+    Service <| title == 'httpd' |> { tag +> 'placement-service' }
+  } else {
+    $api_service_name_real = $api_service_name
   }
 
-  if $manage_service {
-    if $enabled {
-      $service_ensure = 'running'
-    } else {
-      $service_ensure = 'stopped'
-    }
-    if $api_service_name == $::placement::params::service_name {
-      service { 'placement-api':
-        ensure     => $service_ensure,
-        name       => $::placement::params::service_name,
-        enable     => $enabled,
-        hasstatus  => true,
-        hasrestart => true,
-        tag        => ['placement-service', 'placement-db-sync-service'],
-      }
-    } elsif $api_service_name == 'httpd' {
-      include ::apache::params
-      service { 'placement-api':
-        ensure => 'stopped',
-        name   => $::placement::params::service_name,
-        enable => false,
-        tag    => ['placement-service', 'placement-db-sync-service'],
-      }
-      Service['placement-api'] -> Service[$api_service_name]
-      Service<| title == 'httpd' |> { tag +> ['placement-service', 'placement-db-sync-service'] }
-    }
+  placement::generic_service { 'api':
+    service_name   => $api_service_name_real,
+    package_name   => $::placement::params::package_name,
+    manage_service => $manage_service,
+    enabled        => $enabled,
+    ensure_package => $package_ensure,
   }
+
   if $sync_db {
     include ::placement::db::sync
   }
