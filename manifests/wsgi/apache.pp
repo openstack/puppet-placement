@@ -120,10 +120,13 @@ class placement::wsgi::apache (
     include apache::mod::ssl
   }
 
-  placement::generic_service { 'api':
-    service_name   => false,
-    package_name   => $::placement::params::package_name,
-    ensure_package => $ensure_package,
+  if ! defined(Class['placement::api']) {
+    warning('placement::api class will be required in a future release')
+    placement::generic_service { 'api':
+      service_name   => false,
+      package_name   => $::placement::params::package_name,
+      ensure_package => $ensure_package,
+    }
   }
 
   file { $::placement::params::httpd_config_file:
