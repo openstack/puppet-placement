@@ -1,5 +1,5 @@
 ---
 deprecations:
   - |
-    The ``placmenet::api`` class will be required in a future release evne when
-    wsgi is used.
+    The ``placmenet::api`` class will be required in a future release even when
+    apache+wsgi is used.
