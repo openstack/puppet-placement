@@ -44,7 +44,7 @@
 #
 # [*workers*]
 #   (Optional) Number of WSGI workers to spawn.
-#   Defaults to 1
+#   Defaults to $::os_workers
 #
 # [*priority*]
 #   (Optional) The priority for the vhost.
@@ -52,7 +52,7 @@
 #
 # [*threads*]
 #   (Optional) The number of threads for the vhost.
-#   Defaults to $::os_workers
+#   Defaults to 1
 #
 # [*wsgi_process_display_name*]
 #   (Optional) Name of the WSGI process display-name.
@@ -96,9 +96,9 @@ class placement::wsgi::apache (
   $bind_host                 = undef,
   $path                      = '/placement',
   $ssl                       = true,
-  $workers                   = 1,
+  $workers                   = $::os_workers,
   $priority                  = '10',
-  $threads                   = $::os_workers,
+  $threads                   = 1,
   $wsgi_process_display_name = undef,
   $ensure_package            = 'present',
   $ssl_cert                  = undef,
