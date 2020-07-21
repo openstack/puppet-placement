@@ -19,6 +19,7 @@ class placement::params {
       $package_name        = 'openstack-placement-api'
       $common_package_name = 'openstack-placement-common'
       $python_package_name = "python${pyvers_real}-placement"
+      $osc_package_name    = "python${pyvers_real}-osc-placement"
       $service_name        = false
       $public_url          = 'http://127.0.0.1/placement'
       $internal_url        = 'http://127.0.0.1/placement'
@@ -31,6 +32,7 @@ class placement::params {
       $package_name        = 'placement-api'
       $common_package_name = 'placement-common'
       $python_package_name = "python${pyvers_real}-placement"
+      $osc_package_name    = "python${pyvers_real}-osc-placement"
       case $::os_package_type {
         'debian': {
           $service_name    = 'placement-api'
