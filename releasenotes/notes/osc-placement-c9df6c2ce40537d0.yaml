@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The new ``placement::client`` class has been added to manage osc-placement
+    package.
