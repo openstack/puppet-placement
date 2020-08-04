@@ -30,6 +30,7 @@ describe 'placement' do
         {
           :ensure_package                  => 'absent',
           :sync_db                         => false,
+          :state_path                      => '/var/lib/placement',
           :randomize_allocation_candidates => true,
           :allocation_conflict_retry_count => 10,
         }
@@ -53,6 +54,7 @@ describe 'placement' do
         :tag     => ['openstack', 'placement-package'],
       )}
 
+      it { should contain_placement_config('DEFAULT/state_path').with_value('/var/lib/placement') }
       it { should contain_placement_config('placement/randomize_allocation_candidates').with_value(true) }
       it { should contain_placement_config('placement/allocation_conflict_retry_count').with_value(10) }
     end

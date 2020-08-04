@@ -12,6 +12,10 @@
 #   (Optional) Run db sync on the node.
 #   Defaults to true
 #
+# [*state_path*]
+#   (optional) Directory for storing state.
+#   Defaults to $::os_service_default
+#
 # [*randomize_allocation_candidates*]
 #   (Optional) Randomize the results of the returned
 #   allocation candidates.
@@ -25,6 +29,7 @@
 class placement(
   $ensure_package                  = 'present',
   $sync_db                         = true,
+  $state_path                      = $::os_service_default,
   $randomize_allocation_candidates = $::os_service_default,
   $allocation_conflict_retry_count = $::os_service_default,
 ) inherits placement::params {
@@ -49,6 +54,7 @@ class placement(
   }
 
   placement_config {
+    'DEFAULT/state_path'                       : value => $state_path;
     'placement/randomize_allocation_candidates': value => $randomize_allocation_candidates;
     'placement/allocation_conflict_retry_count': value => $allocation_conflict_retry_count;
   }

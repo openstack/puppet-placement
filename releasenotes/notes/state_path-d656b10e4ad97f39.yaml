@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The new ``placemaner::state_path`` parameter has been added to specify
+    the directory for storing state.
