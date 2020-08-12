@@ -84,6 +84,11 @@
 #   (Optional) The error log file name for the virtualhost.
 #   Defaults to undef
 #
+# [*vhost_custom_fragment*]
+#   (optional) Passes a string of custom configuration
+#   directives to be placed at the end of the vhost configuration.
+#   Defaults to undef.
+#
 # == Examples
 #
 #   include apache
@@ -111,6 +116,7 @@ class placement::wsgi::apache (
   $access_log_file           = false,
   $access_log_format         = false,
   $error_log_file            = undef,
+  $vhost_custom_fragment       = undef,
 ) {
 
   include placement::params
@@ -163,6 +169,7 @@ class placement::wsgi::apache (
     ssl_key                   => $ssl_key,
     threads                   => $threads,
     user                      => 'placement',
+    vhost_custom_fragment     => $vhost_custom_fragment,
     workers                   => $workers,
     wsgi_daemon_process       => 'placement-api',
     wsgi_process_display_name => $wsgi_process_display_name,
