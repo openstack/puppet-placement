@@ -21,6 +21,7 @@ describe 'placement::db' do
         :connection_debug   => '<SERVICE DEFAULT>',
         :connection_trace   => '<SERVICE DEFAULT>',
         :pool_timeout       => '<SERVICE DEFAULT>',
+        :mysql_enable_ndb   => '<SERVICE DEFAULT>',
       )}
     end
 
@@ -38,6 +39,7 @@ describe 'placement::db' do
           :database_connection_debug   => '100',
           :database_connection_trace   => true,
           :database_pool_timeout       => '10',
+          :mysql_enable_ndb            => true,
         }
       end
 
@@ -59,6 +61,7 @@ describe 'placement::db' do
         :connection_debug   => '100',
         :connection_trace   => true,
         :pool_timeout       => '10',
+        :mysql_enable_ndb   => true,
       )}
     end
   end
