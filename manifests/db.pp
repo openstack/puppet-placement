@@ -72,9 +72,6 @@ class placement::db (
   include placement::deps
   include placement::config
 
-  validate_legacy(Oslo::Dbconn, 'validate_re', $database_connection,
-    ['^(sqlite|mysql(\+pymysql)?|postgresql):\/\/(\S+:\S+@\S+\/\S+)?'])
-
   oslo::db { 'placement_config':
     config_group       => 'placement_database',
     sqlite_synchronous => $database_sqlite_synchronous,
