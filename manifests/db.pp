@@ -70,7 +70,6 @@ class placement::db (
 ) {
 
   include placement::deps
-  include placement::config
 
   oslo::db { 'placement_config':
     config_group       => 'placement_database',

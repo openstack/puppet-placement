@@ -5,7 +5,6 @@ describe 'placement::db' do
     context 'with default parameters' do
       it {
         should contain_class('placement::deps')
-        should contain_class('placement::config')
       }
 
       it { should contain_oslo__db('placement_config').with(
@@ -45,7 +44,6 @@ describe 'placement::db' do
 
       it {
         should contain_class('placement::deps')
-        should contain_class('placement::config')
       }
 
       it { should contain_oslo__db('placement_config').with(
