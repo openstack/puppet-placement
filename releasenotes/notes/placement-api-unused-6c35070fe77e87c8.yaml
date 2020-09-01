@@ -1,0 +1,8 @@
+---
+deprecations:
+  - |
+    The following two parameter have been deprecated, because they have had no
+    effect since added.
+
+    - ``placement::api::host``
+    - ``placement::api::port``

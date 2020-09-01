@@ -19,14 +19,6 @@
 #   to make placement-api be a web app using apache mod_wsgi.
 #   Defaults to $::placement::params::service_name
 #
-# [*host*]
-#   (optional) The placement api bind address.
-#   Defaults to '0.0.0.0'
-#
-# [*port*]
-#   (optional) Th e placement api port.
-#   Defaults to '8778'
-#
 # [*package_ensure*]
 #   (optional) ensure state for package.
 #   Defaults to 'present'
@@ -35,14 +27,25 @@
 #   (optional) Run placement-manage db sync on api nodes after installing the package.
 #   Defaults to false
 #
+# DEPRECATED PARAMETERS
+#
+# [*host*]
+#   (optional) The placement api bind address.
+#   Defaults to undef
+#
+# [*port*]
+#   (optional) Th e placement api port.
+#   Defaults to undef
+#
 class placement::api (
   $enabled          = true,
   $manage_service   = true,
   $api_service_name = $::placement::params::service_name,
-  $host             = '0.0.0.0',
-  $port             = '8778',
   $package_ensure   = 'present',
   $sync_db          = false,
+  # DEPRECATED PARAMETERS
+  $host             = undef,
+  $port             = undef,
 ) inherits placement::params {
 
   include placement::deps
