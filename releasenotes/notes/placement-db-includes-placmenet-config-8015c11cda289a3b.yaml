@@ -1,0 +1,6 @@
+---
+upgrade:
+  - |
+    Now the ``placmenet::db`` class doesn't include the ``placement::config``
+    class automatically. Include the ``placement::config`` explicitly in
+    manifests if the class is required.
