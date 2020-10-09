@@ -12,6 +12,8 @@ describe 'placement::db::mysql' do
   end
 
   shared_examples 'placement::db::mysql' do
+    it { should contain_class('placement::deps') }
+
     context 'with only required params' do
       it { should contain_openstacklib__db__mysql('placement').with(
         :user     => 'placement',
