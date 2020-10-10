@@ -13,6 +13,8 @@ describe 'placement::db::postgresql' do
 
   shared_examples 'placement::db::postgresql' do
     context 'with only required parameters' do
+      it { is_expected.to contain_class('placement::deps') }
+
       it { is_expected.to contain_openstacklib__db__postgresql('placement').with(
         :user       => 'placement',
         :password   => 'placementpass',
