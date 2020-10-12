@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe 'placement::db::sync' do
   shared_examples 'placement::db::sync' do
+
+    it { is_expected.to contain_class('placement::deps') }
+
     it { is_expected.to contain_exec('placement-manage-db-sync').with(
       :command     => 'placement-manage db sync',
       :path        => [ '/bin', '/usr/bin', '/usr/local/bin'],
