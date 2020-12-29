@@ -20,12 +20,12 @@
 #   Defaults to empty hash.
 #
 # [*policy_path*]
-#   (Optional) Path to the nova policy.json file
-#   Defaults to /etc/placement/policy.json
+#   (Optional) Path to the nova policy.yaml file
+#   Defaults to /etc/placement/policy.yaml
 #
 class placement::policy (
   $policies    = {},
-  $policy_path = '/etc/placement/policy.json',
+  $policy_path = '/etc/placement/policy.yaml',
 ) {
 
   include placement::deps
@@ -34,9 +34,10 @@ class placement::policy (
   validate_legacy(Hash, 'validate_hash', $policies)
 
   Openstacklib::Policy::Base {
-    file_path  => $policy_path,
-    file_user  => 'root',
-    file_group => $::placement::params::group,
+    file_path   => $policy_path,
+    file_user   => 'root',
+    file_group  => $::placement::params::group,
+    file_format => 'yaml',
   }
 
   create_resources('openstacklib::policy::base', $policies)
