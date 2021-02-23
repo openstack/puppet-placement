@@ -37,7 +37,7 @@ describe 'placement::client' do
             if facts[:operatingsystemmajrelease] > '7'
               { :client_package_name => 'python3-osc-placement' }
             else
-              { :client_package_name => 'python-osc-placement' }
+              { :client_package_name => 'python2-osc-placement' }
             end
           end
         end
