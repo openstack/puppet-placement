@@ -4,6 +4,10 @@
 #
 # === Parameters
 #
+# [*enforce_scope*]
+#  (Optional) Whether or not to enforce scope when evaluating policies.
+#  Defaults to $::os_service_default.
+#
 # [*policies*]
 #   (Optional) Set of policies to configure for placement
 #   Example :
@@ -20,12 +24,13 @@
 #   Defaults to empty hash.
 #
 # [*policy_path*]
-#   (Optional) Path to the nova policy.yaml file
+#   (Optional) Path to the placement policy.yaml file
 #   Defaults to /etc/placement/policy.yaml
 #
 class placement::policy (
-  $policies    = {},
-  $policy_path = '/etc/placement/policy.yaml',
+  $enforce_scope = $::os_service_default,
+  $policies      = {},
+  $policy_path   = '/etc/placement/policy.yaml',
 ) {
 
   include placement::deps
@@ -42,6 +47,9 @@ class placement::policy (
 
   create_resources('openstacklib::policy::base', $policies)
 
-  oslo::policy { 'placement_config': policy_file => $policy_path }
+  oslo::policy { 'placement_config':
+    enforce_scope => $enforce_scope,
+    policy_file   => $policy_path
+  }
 
 }
