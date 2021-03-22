@@ -4,8 +4,9 @@ describe 'placement::policy' do
   shared_examples 'placement::policy' do
     let :params do
       {
-        :policy_path => '/etc/placement/policy.yaml',
-        :policies    => {
+        :enforce_scope => false,
+        :policy_path   => '/etc/placement/policy.yaml',
+        :policies      => {
           'context_is_admin' => {
             'key'   => 'context_is_admin',
             'value' => 'foo:bar'
@@ -15,15 +16,16 @@ describe 'placement::policy' do
     end
 
     it 'set up the policies' do
-      is_expected.to contain_openstacklib__policy__base('context_is_admin').with(
+      is_expected.to contain_openstacklib__policy__base('context_is_admin').with({
         :key         => 'context_is_admin',
         :value       => 'foo:bar',
         :file_user   => 'root',
         :file_group  => 'placement',
         :file_format => 'yaml',
-      )
+      })
       is_expected.to contain_oslo__policy('placement_config').with(
-        :policy_file => '/etc/placement/policy.yaml',
+        :enforce_scope => false,
+        :policy_file   => '/etc/placement/policy.yaml',
       )
     end
   end
