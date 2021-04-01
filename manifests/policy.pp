@@ -32,11 +32,16 @@
 #   (Optional) Path to the placement policy.yaml file
 #   Defaults to /etc/placement/policy.yaml
 #
+# [*policy_dirs*]
+#   (Optional) Path to the placement policy folder
+#   Defaults to $::os_service_default
+#
 class placement::policy (
   $enforce_scope        = $::os_service_default,
   $enforce_new_defaults = $::os_service_default,
   $policies             = {},
   $policy_path          = '/etc/placement/policy.yaml',
+  $policy_dirs          = $::os_service_default,
 ) {
 
   include placement::deps
@@ -56,7 +61,8 @@ class placement::policy (
   oslo::policy { 'placement_config':
     enforce_scope        => $enforce_scope,
     enforce_new_defaults => $enforce_new_defaults,
-    policy_file          => $policy_path
+    policy_file          => $policy_path,
+    policy_dirs          => $policy_dirs,
   }
 
 }
