@@ -44,6 +44,11 @@ class placement::deps {
   -> Openstacklib::Policy::Base<||>
   ~> Anchor['placement::config::end']
 
+  # On any uwsgi config change, we must restart Placement.
+  Anchor['placement::config::begin']
+  -> Placement_api_uwsgi_config<||>
+  ~> Anchor['placement::config::end']
+
   # Installation or config changes will always restart services.
   Anchor['placement::install::end'] ~> Anchor['placement::service::begin']
   Anchor['placement::config::end']  ~> Anchor['placement::service::begin']
