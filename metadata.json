@@ -11,15 +11,15 @@
         },
         {
             "name": "openstack/keystone",
-            "version_requirement": ">=18.4.0 <19.0.0"
+            "version_requirement": ">=19.0.0 <20.0.0"
         },
         {
             "name": "openstack/openstacklib",
-            "version_requirement": ">=18.4.0 <19.0.0"
+            "version_requirement": ">=19.0.0 <20.0.0"
         },
         {
             "name": "openstack/oslo",
-            "version_requirement": ">=18.4.0 <19.0.0"
+            "version_requirement": ">=19.0.0 <20.0.0"
         },
         {
             "name": "puppetlabs/apache",
@@ -71,5 +71,5 @@
     ],
     "source": "https://opendev.org/openstack/puppet-placement.git",
     "summary": "Puppet module for OpenStack Placement",
-    "version": "5.4.0"
+    "version": "6.0.0"
 }
