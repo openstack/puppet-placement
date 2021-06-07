@@ -76,24 +76,10 @@ describe 'placement' do
             :common_package_name => 'placement-common',
           }
         when 'RedHat'
-          if facts[:operatingsystem] == 'Fedora'
-            {
-              :python_package_name => 'python3-placement',
-              :common_package_name => 'openstack-placement-common',
-            }
-          else
-            if facts[:operatingsystemmajrelease] > '7'
-              {
-                :python_package_name => 'python3-placement',
-                :common_package_name => 'openstack-placement-common',
-              }
-            else
-              {
-                :python_package_name => 'python2-placement',
-                :common_package_name => 'openstack-placement-common',
-              }
-            end
-          end
+          {
+            :python_package_name => 'python3-placement',
+            :common_package_name => 'openstack-placement-common',
+          }
         end
       end
 

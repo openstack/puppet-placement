@@ -31,15 +31,7 @@ describe 'placement::client' do
         when 'Debian'
           { :client_package_name => 'python3-osc-placement' }
         when 'RedHat'
-          if facts[:operatingsystem] == 'Fedora'
-            { :client_package_name => 'python3-osc-placement' }
-          else
-            if facts[:operatingsystemmajrelease] > '7'
-              { :client_package_name => 'python3-osc-placement' }
-            else
-              { :client_package_name => 'python2-osc-placement' }
-            end
-          end
+          { :client_package_name => 'python3-osc-placement' }
         end
       end
 
