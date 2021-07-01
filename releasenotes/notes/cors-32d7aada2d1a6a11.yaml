@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    The new ``placement::cors`` class has been added.
