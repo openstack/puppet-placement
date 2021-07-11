@@ -9,6 +9,7 @@ describe 'placement::api' do
       end
 
       it { should contain_class('placement::deps') }
+      it { should contain_class('placement::policy') }
       it { should contain_placement__generic_service('api').with(
         :service_name   => platform_params[:service_name],
         :package_name   => platform_params[:package_name],
