@@ -1,0 +1,10 @@
+---
+upgrade:
+  - |
+    Defaults of the following parameters will be changed in a future release.
+    Please set the parameter explicitly to keep the value during upgrade.
+    Also it is likely that endpoint parameters in ``nova::keystone::auth``
+    should be also updated.
+
+    - ``placement::wsgi::apache::api_port``: from ``80`` to ``8778``
+    - ``placement::wsgi::apache::path``: from ``/placement`` to ``/``
