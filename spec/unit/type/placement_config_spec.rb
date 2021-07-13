@@ -30,12 +30,12 @@ describe 'Puppet::Type.type(:placement_config)' do
 
   it 'should accept a valid value' do
     @placement_config[:value] = 'bar'
-    expect(@placement_config[:value]).to eq('bar')
+    expect(@placement_config[:value]).to eq(['bar'])
   end
 
   it 'should not accept a value with whitespace' do
     @placement_config[:value] = 'b ar'
-    expect(@placement_config[:value]).to eq('b ar')
+    expect(@placement_config[:value]).to eq(['b ar'])
   end
 
   it 'should accept valid ensure values' do
@@ -60,6 +60,5 @@ describe 'Puppet::Type.type(:placement_config)' do
     expect(dependency[0].target).to eq(@placement_config)
     expect(dependency[0].source).to eq(anchor)
   end
-
 
 end
