@@ -116,8 +116,16 @@ class placement::wsgi::apache (
   $access_log_file           = false,
   $access_log_format         = false,
   $error_log_file            = undef,
-  $vhost_custom_fragment       = undef,
+  $vhost_custom_fragment     = undef,
 ) {
+
+  if $api_port == 80 {
+    warning('The default api_port will be changed from 80 to 8778 in a future release.')
+  }
+
+  if $path == '/placement' {
+    warning('The default path will be changed from /placement to / in a future release.')
+  }
 
   include placement::params
   include apache
