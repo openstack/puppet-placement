@@ -58,10 +58,6 @@
 #   (Optional) Name of the WSGI process display-name.
 #   Defaults to undef
 #
-# [*ensure_package*]
-#   (Optional) Control the ensure parameter for the Placement API package ressource.
-#   Defaults to 'present'
-#
 # [*ssl_cert*]
 # [*ssl_key*]
 # [*ssl_chain*]
@@ -89,6 +85,12 @@
 #   directives to be placed at the end of the vhost configuration.
 #   Defaults to undef.
 #
+# DEPRECATED PARAMETERS
+#
+# [*ensure_package*]
+#   (Optional) Control the ensure parameter for the Placement API package ressource.
+#   Defaults to undef
+#
 # == Examples
 #
 #   include apache
@@ -105,7 +107,6 @@ class placement::wsgi::apache (
   $priority                  = '10',
   $threads                   = 1,
   $wsgi_process_display_name = undef,
-  $ensure_package            = 'present',
   $ssl_cert                  = undef,
   $ssl_key                   = undef,
   $ssl_chain                 = undef,
@@ -117,6 +118,8 @@ class placement::wsgi::apache (
   $access_log_format         = false,
   $error_log_file            = undef,
   $vhost_custom_fragment     = undef,
+  # DEPRECATED PARAMETERS
+  $ensure_package            = undef,
 ) {
 
   if $api_port == 80 {
@@ -134,13 +137,8 @@ class placement::wsgi::apache (
     include apache::mod::ssl
   }
 
-  if ! defined(Class['placement::api']) {
-    warning('placement::api class will be required in a future release')
-    placement::generic_service { 'api':
-      service_name   => false,
-      package_name   => $::placement::params::package_name,
-      ensure_package => $ensure_package,
-    }
+  if $ensure_package != undef {
+    warning('The placement::wsgi::apache::ensure_package parameter is deprecated and has no effect')
   }
 
   file { $::placement::params::httpd_config_file:

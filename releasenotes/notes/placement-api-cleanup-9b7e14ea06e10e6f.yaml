@@ -1,0 +1,11 @@
+---
+upgrade:
+  - |
+    The ``placement::wsgi::apache`` class no longer manages services and
+    packages. The ``placmenet::api`` class should be included to manage
+    these resources.
+
+deprecations:
+  - |
+    The ``placement::wsgi::apache::ensure_package`` parameter has been
+    deprecated and has no effect now.

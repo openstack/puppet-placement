@@ -10,12 +10,6 @@ describe 'placement::wsgi::apache' do
         should contain_class('apache::mod::ssl')
       }
 
-      it { should contain_placement__generic_service('api').with(
-        :service_name   => false,
-        :package_name   => platform_params[:package_name],
-        :ensure_package => 'present',
-      )}
-
       it { should contain_file(platform_params[:httpd_config_file]).with_ensure('present') }
 
       it { should contain_openstacklib__wsgi__apache('placement_wsgi').with(
@@ -68,7 +62,6 @@ describe 'placement::wsgi::apache' do
           :wsgi_process_display_name => 'custom',
           :threads                   => 5,
           :priority                  => '25',
-          :ensure_package            => 'absent',
           :access_log_file           => '/var/log/httpd/access_log',
           :access_log_format         => 'some format',
           :error_log_file            => '/var/log/httpd/error_log',
@@ -81,12 +74,6 @@ describe 'placement::wsgi::apache' do
         should contain_class('apache::mod::wsgi')
         should_not contain_class('apache::mod::ssl')
       }
-
-      it { should contain_placement__generic_service('api').with(
-        :service_name   => false,
-        :package_name   => platform_params[:package_name],
-        :ensure_package => params[:ensure_package],
-      )}
 
       it { should contain_file(platform_params[:httpd_config_file]).with_ensure('present') }
 
