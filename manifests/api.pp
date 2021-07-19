@@ -49,6 +49,7 @@ class placement::api (
 ) inherits placement::params {
 
   include placement::deps
+  include placement::policy
 
   if $manage_service {
     if $api_service_name == 'httpd' {
