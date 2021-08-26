@@ -128,6 +128,19 @@ describe 'placement::keystone::authtoken' do
 
       it { is_expected.to contain_package('python-memcache') }
     end
+
+    context 'when overriding parameters via params hash' do
+      before do
+        params.merge!({
+          :username => 'myuser',
+          :params   => { 'username' => 'myotheruser' },
+        })
+      end
+
+      it 'configure keystone_authtoken' do
+        is_expected.to contain_placement_config('keystone_authtoken/username').with_value(params[:params]['username'])
+      end
+    end
   end
 
   on_supported_os({
