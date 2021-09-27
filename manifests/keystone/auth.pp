@@ -49,7 +49,7 @@
 #
 # [*service_description*]
 #   (Optional) Description of the service.
-#   Defaults to 'Placement Service'
+#   Defaults to 'OpenStack Placement Service'
 #
 # [*public_url*]
 #   (Optional) The endpoint's public url.
@@ -75,7 +75,7 @@ class placement::keystone::auth (
   $configure_user      = true,
   $configure_user_role = true,
   $service_name        = 'placement',
-  $service_description = 'Placement Service',
+  $service_description = 'OpenStack Placement Service',
   $service_type        = 'placement',
   $region              = 'RegionOne',
   $public_url          = 'http://127.0.0.1/placement',
