@@ -65,11 +65,10 @@ class placement::api (
         Service['placement-api'] -> Service[$api_service_name]
       }
       $api_service_name_real = false
+      Service <| title == 'httpd' |> { tag +> 'placement-service' }
     } else {
       $api_service_name_real = $api_service_name
     }
-
-    Service <| title == 'httpd' |> { tag +> 'placement-service' }
   } else {
     $api_service_name_real = $api_service_name
   }
