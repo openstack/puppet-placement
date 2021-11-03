@@ -102,7 +102,7 @@ class placement::wsgi::apache (
   $api_port                  = 80,
   $bind_host                 = undef,
   $path                      = '/placement',
-  $ssl                       = true,
+  $ssl                       = undef,
   $workers                   = $::os_workers,
   $priority                  = '10',
   $threads                   = 1,
@@ -130,10 +130,15 @@ class placement::wsgi::apache (
     warning('The default path will be changed from /placement to / in a future release.')
   }
 
+  if $ssl == undef {
+    warning('Default of the ssl parameter will be changed in a future release')
+  }
+  $ssl_real = pick($ssl, true)
+
   include placement::params
   include apache
   include apache::mod::wsgi
-  if $ssl {
+  if $ssl_real {
     include apache::mod::ssl
   }
 
@@ -165,7 +170,7 @@ class placement::wsgi::apache (
     path                      => $path,
     priority                  => $priority,
     servername                => $servername,
-    ssl                       => $ssl,
+    ssl                       => $ssl_real,
     ssl_ca                    => $ssl_ca,
     ssl_cert                  => $ssl_cert,
     ssl_certs_dir             => $ssl_certs_dir,
