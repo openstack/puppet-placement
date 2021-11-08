@@ -63,7 +63,7 @@ describe 'placement::api' do
       let(:platform_params) do
         case facts[:osfamily]
         when 'Debian'
-          if facts[:os_package_type] == 'debian'
+          if facts[:operatingsystem] == 'Debian'
             { :service_name => 'placement-api',
               :package_name => 'placement-api'}
           else

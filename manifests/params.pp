@@ -27,8 +27,8 @@ class placement::params {
       $common_package_name = 'placement-common'
       $python_package_name = 'python3-placement'
       $osc_package_name    = 'python3-osc-placement'
-      case $::os_package_type {
-        'debian': {
+      case $::operatingsystem {
+        'Debian': {
           $service_name    = 'placement-api'
         }
         default: {
