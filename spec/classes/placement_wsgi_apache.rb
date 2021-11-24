@@ -14,9 +14,9 @@ describe 'placement::wsgi::apache' do
 
       it { should contain_openstacklib__wsgi__apache('placement_wsgi').with(
         :bind_host                 => nil,
-        :bind_port                 => 80,
+        :bind_port                 => 8778,
         :group                     => 'placement',
-        :path                      => '/placement',
+        :path                      => '/',
         :priority                  => '10',
         :servername                => facts[:fqdn],
         :ssl                       => true,

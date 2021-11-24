@@ -23,9 +23,9 @@ describe 'placement::keystone::auth' do
         :password            => 'placement_password',
         :email               => 'placement@localhost',
         :tenant              => 'services',
-        :public_url          => 'http://127.0.0.1/placement',
-        :internal_url        => 'http://127.0.0.1/placement',
-        :admin_url           => 'http://127.0.0.1/placement',
+        :public_url          => 'http://127.0.0.1:8778',
+        :internal_url        => 'http://127.0.0.1:8778',
+        :admin_url           => 'http://127.0.0.1:8778',
       ) }
     end
 

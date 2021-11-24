@@ -53,17 +53,17 @@
 #
 # [*public_url*]
 #   (Optional) The endpoint's public url.
-#   Defaults to 'http://127.0.0.1/placement'
+#   Defaults to 'http://127.0.0.1:8778'
 #   This url should *not* contain any trailing '/'.
 #
 # [*admin_url*]
 #   (Optional) The endpoint's admin url.
-#   Defaults to 'http://127.0.0.1/placement'
+#   Defaults to 'http://127.0.0.1:8778'
 #   This url should *not* contain any trailing '/'.
 #
 # [*internal_url*]
 #   (Optional) The endpoint's internal url.
-#   Defaults to 'http://127.0.0.1/placement'
+#   Defaults to 'http://127.0.0.1:8778'
 #
 class placement::keystone::auth (
   $password,
@@ -78,9 +78,9 @@ class placement::keystone::auth (
   $service_description = 'Placement Service',
   $service_type        = 'placement',
   $region              = 'RegionOne',
-  $public_url          = 'http://127.0.0.1/placement',
-  $admin_url           = 'http://127.0.0.1/placement',
-  $internal_url        = 'http://127.0.0.1/placement',
+  $public_url          = 'http://127.0.0.1:8778',
+  $admin_url           = 'http://127.0.0.1:8778',
+  $internal_url        = 'http://127.0.0.1:8778',
 ) {
 
   include placement::deps
