@@ -161,8 +161,6 @@ class placement::wsgi::apache (
     -> File[$::placement::params::httpd_config_file]
     ~> Service['httpd']
 
-  Service <| title == 'httpd' |> { tag +> 'placement-service' }
-
   ::openstacklib::wsgi::apache { 'placement_wsgi':
     bind_host                 => $bind_host,
     bind_port                 => $api_port,
