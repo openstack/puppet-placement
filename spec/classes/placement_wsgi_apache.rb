@@ -5,9 +5,6 @@ describe 'placement::wsgi::apache' do
     context 'with default parameters' do
       it {
         should contain_class('placement::params')
-        should contain_class('apache')
-        should contain_class('apache::mod::wsgi')
-        should contain_class('apache::mod::ssl')
       }
 
       it { should contain_file(platform_params[:httpd_config_file]).with_ensure('present') }
@@ -70,9 +67,6 @@ describe 'placement::wsgi::apache' do
 
       it {
         should contain_class('placement::params')
-        should contain_class('apache')
-        should contain_class('apache::mod::wsgi')
-        should_not contain_class('apache::mod::ssl')
       }
 
       it { should contain_file(platform_params[:httpd_config_file]).with_ensure('present') }
@@ -125,14 +119,12 @@ describe 'placement::wsgi::apache' do
         case facts[:osfamily]
         when 'Debian'
           {
-            :package_name       => 'placement-api',
             :httpd_config_file  => '/etc/apache2/sites-available/nova-placement-api.conf',
             :wsgi_script_path   => '/var/www/cgi-bin/placement',
             :wsgi_script_source => '/usr/bin/placement-api',
           }
         when 'RedHat'
           {
-            :package_name       => 'openstack-placement-api',
             :httpd_config_file  => '/etc/httpd/conf.d/00-placement-api.conf',
             :wsgi_script_path   => '/var/www/cgi-bin/placement',
             :wsgi_script_source => '/usr/bin/placement-api',
