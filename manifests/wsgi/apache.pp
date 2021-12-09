@@ -28,7 +28,7 @@
 #
 # [*api_port*]
 #   (Optional) The port for Placement API service.
-#   Defaults to 80
+#   Defaults to 8778
 #
 # [*bind_host*]
 #   (Optional) The host/ip address Apache will listen on.
@@ -36,7 +36,7 @@
 #
 # [*path*]
 #   (Optional) The prefix for the endpoint.
-#   Defaults to '/placement'
+#   Defaults to '/'
 #
 # [*ssl*]
 #   (Optional) Use ssl ? (boolean)
@@ -99,9 +99,9 @@
 #
 class placement::wsgi::apache (
   $servername                = $::fqdn,
-  $api_port                  = 80,
+  $api_port                  = 8778,
   $bind_host                 = undef,
-  $path                      = '/placement',
+  $path                      = '/',
   $ssl                       = undef,
   $workers                   = $::os_workers,
   $priority                  = '10',
@@ -121,14 +121,6 @@ class placement::wsgi::apache (
   # DEPRECATED PARAMETERS
   $ensure_package            = undef,
 ) {
-
-  if $api_port == 80 {
-    warning('The default api_port will be changed from 80 to 8778 in a future release.')
-  }
-
-  if $path == '/placement' {
-    warning('The default path will be changed from /placement to / in a future release.')
-  }
 
   if $ssl == undef {
     warning('Default of the ssl parameter will be changed in a future release')

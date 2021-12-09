@@ -1,0 +1,10 @@
+---
+upgrade:
+  - |
+    Default values of the following parameters have been changed, so that
+    the consistent endpoint url is used by default. Also, default values of
+    the ``placement::keystone::auth::*_url`` parameters have been updated
+    accordingly.
+
+    - ``placement::wsgi::api_port``: ``80`` to ``8787``
+    - ``placement::wsgi::path``: ``/placement`` to ``/``
