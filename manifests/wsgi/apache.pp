@@ -128,11 +128,6 @@ class placement::wsgi::apache (
   $ssl_real = pick($ssl, true)
 
   include placement::params
-  include apache
-  include apache::mod::wsgi
-  if $ssl_real {
-    include apache::mod::ssl
-  }
 
   if $ensure_package != undef {
     warning('The placement::wsgi::apache::ensure_package parameter is deprecated and has no effect')
