@@ -3,11 +3,7 @@ require 'spec_helper'
 describe 'placement::wsgi::apache' do
   shared_examples 'placement::wsgi::apache' do
     context 'with default parameters' do
-      it {
-        should contain_class('placement::params')
-      }
-
-      it { should contain_file(platform_params[:httpd_config_file]).with_ensure('present') }
+      it { should contain_class('placement::params') }
 
       it { should contain_openstacklib__wsgi__apache('placement_wsgi').with(
         :bind_host                 => nil,
@@ -28,7 +24,6 @@ describe 'placement::wsgi::apache' do
         :user                      => 'placement',
         :workers                   => facts[:os_workers],
         :wsgi_daemon_process       => 'placement-api',
-        :wsgi_process_display_name => nil,
         :wsgi_process_group        => 'placement-api',
         :wsgi_script_dir           => platform_params[:wsgi_script_path],
         :wsgi_script_file          => 'placement-api',
@@ -65,11 +60,7 @@ describe 'placement::wsgi::apache' do
         }
       end
 
-      it {
-        should contain_class('placement::params')
-      }
-
-      it { should contain_file(platform_params[:httpd_config_file]).with_ensure('present') }
+      it { should contain_class('placement::params') }
 
       it { should contain_openstacklib__wsgi__apache('placement_wsgi').with(
         :bind_host                 => params[:bind_host],
@@ -119,13 +110,11 @@ describe 'placement::wsgi::apache' do
         case facts[:osfamily]
         when 'Debian'
           {
-            :httpd_config_file  => '/etc/apache2/sites-available/nova-placement-api.conf',
-            :wsgi_script_path   => '/var/www/cgi-bin/placement',
+            :wsgi_script_path   => '/usr/lib/cgi-bin/placement',
             :wsgi_script_source => '/usr/bin/placement-api',
           }
         when 'RedHat'
           {
-            :httpd_config_file  => '/etc/httpd/conf.d/00-placement-api.conf',
             :wsgi_script_path   => '/var/www/cgi-bin/placement',
             :wsgi_script_source => '/usr/bin/placement-api',
           }
