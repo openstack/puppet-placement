@@ -133,21 +133,6 @@ class placement::wsgi::apache (
     warning('The placement::wsgi::apache::ensure_package parameter is deprecated and has no effect')
   }
 
-  file { $::placement::params::httpd_config_file:
-    ensure  => present,
-    content => "#
-# This file has been cleaned by Puppet.
-#
-# OpenStack Placement API configuration has been moved to:
-# - ${priority}-placement_wsgi.conf
-#",
-  }
-  # Ubuntu requires placement-api to be installed before apache to find wsgi script
-  Package<| title == 'placement-api'|> -> Package<| title == 'httpd'|>
-  Package<| title == 'placement-api' |>
-    -> File[$::placement::params::httpd_config_file]
-    ~> Service['httpd']
-
   ::openstacklib::wsgi::apache { 'placement_wsgi':
     bind_host                 => $bind_host,
     bind_port                 => $api_port,
@@ -176,6 +161,7 @@ class placement::wsgi::apache (
     access_log_file           => $access_log_file,
     access_log_format         => $access_log_format,
     error_log_file            => $error_log_file,
+    require                   => Anchor['placement::install::end'],
   }
 
 }
