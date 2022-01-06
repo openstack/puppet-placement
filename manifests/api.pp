@@ -27,6 +27,11 @@
 #   (optional) Run placement-manage db sync on api nodes after installing the package.
 #   Defaults to false
 #
+# [*enable_proxy_headers_parsing*]
+#   (Optional) Enable paste middleware to handle SSL requests through
+#   HTTPProxyToWSGI middleware.
+#   Defaults to $::os_service_default.
+#
 # DEPRECATED PARAMETERS
 #
 # [*host*]
@@ -38,14 +43,15 @@
 #   Defaults to undef
 #
 class placement::api (
-  $enabled          = true,
-  $manage_service   = true,
-  $api_service_name = $::placement::params::service_name,
-  $package_ensure   = 'present',
-  $sync_db          = false,
+  $enabled                      = true,
+  $manage_service               = true,
+  $api_service_name             = $::placement::params::service_name,
+  $package_ensure               = 'present',
+  $sync_db                      = false,
+  $enable_proxy_headers_parsing = $::os_service_default,
   # DEPRECATED PARAMETERS
-  $host             = undef,
-  $port             = undef,
+  $host                         = undef,
+  $port                         = undef,
 ) inherits placement::params {
 
   include placement::deps
@@ -84,5 +90,9 @@ class placement::api (
 
   if $sync_db {
     include placement::db::sync
+  }
+
+  oslo::middleware { 'placement_config':
+    enable_proxy_headers_parsing => $enable_proxy_headers_parsing,
   }
 }

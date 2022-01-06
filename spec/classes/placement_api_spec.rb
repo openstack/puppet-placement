@@ -17,6 +17,10 @@ describe 'placement::api' do
         :enabled        => true,
         :ensure_package => 'present',
       ) }
+
+      it { should contain_oslo__middleware('placement_config').with(
+        :enable_proxy_headers_parsing => '<SERVICE DEFAULT>',
+      ) }
     end
 
     context 'with package_ensure parameter provided' do
@@ -45,6 +49,16 @@ describe 'placement::api' do
       end
 
       it { should contain_class('placement::db::sync') }
+    end
+
+    context 'with enable_proxy_headers_parsing set' do
+      let :params do
+        { :enable_proxy_headers_parsing => true }
+      end
+
+      it { should contain_oslo__middleware('placement_config').with(
+        :enable_proxy_headers_parsing => true,
+      ) }
     end
   end
 
