@@ -127,11 +127,14 @@ class placement::wsgi::apache (
   }
   $ssl_real = pick($ssl, true)
 
+  include placement::deps
   include placement::params
 
   if $ensure_package != undef {
     warning('The placement::wsgi::apache::ensure_package parameter is deprecated and has no effect')
   }
+
+  Anchor['placement::install::end'] -> Class['apache']
 
   ::openstacklib::wsgi::apache { 'placement_wsgi':
     bind_host                 => $bind_host,
@@ -161,7 +164,6 @@ class placement::wsgi::apache (
     access_log_file           => $access_log_file,
     access_log_format         => $access_log_format,
     error_log_file            => $error_log_file,
-    require                   => Anchor['placement::install::end'],
   }
 
 }
