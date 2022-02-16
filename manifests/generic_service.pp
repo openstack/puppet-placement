@@ -62,14 +62,14 @@ define placement::generic_service(
       } else {
         $service_ensure = 'stopped'
       }
-    }
 
-    service { $placement_title:
-      ensure    => $service_ensure,
-      name      => $service_name,
-      enable    => $enabled,
-      hasstatus => true,
-      tag       => 'placement-service',
+      service { $placement_title:
+        ensure    => $service_ensure,
+        name      => $service_name,
+        enable    => $enabled,
+        hasstatus => true,
+        tag       => 'placement-service',
+      }
     }
   }
 }
