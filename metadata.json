@@ -71,5 +71,5 @@
     ],
     "source": "git://github.com/openstack/puppet-placement.git",
     "summary": "Puppet module for OpenStack Placement",
-    "version": "4.4.0"
+    "version": "4.5.0"
 }
