@@ -40,7 +40,7 @@
 #
 # [*ssl*]
 #   (Optional) Use ssl ? (boolean)
-#   Defaults to true
+#   Defaults to false
 #
 # [*workers*]
 #   (Optional) Number of WSGI workers to spawn.
@@ -102,7 +102,7 @@ class placement::wsgi::apache (
   $api_port                  = 8778,
   $bind_host                 = undef,
   $path                      = '/',
-  $ssl                       = undef,
+  $ssl                       = false,
   $workers                   = $::os_workers,
   $priority                  = '10',
   $threads                   = 1,
@@ -122,11 +122,6 @@ class placement::wsgi::apache (
   $ensure_package            = undef,
 ) {
 
-  if $ssl == undef {
-    warning('Default of the ssl parameter will be changed in a future release')
-  }
-  $ssl_real = pick($ssl, true)
-
   include placement::deps
   include placement::params
 
@@ -143,7 +138,7 @@ class placement::wsgi::apache (
     path                      => $path,
     priority                  => $priority,
     servername                => $servername,
-    ssl                       => $ssl_real,
+    ssl                       => $ssl,
     ssl_ca                    => $ssl_ca,
     ssl_cert                  => $ssl_cert,
     ssl_certs_dir             => $ssl_certs_dir,
