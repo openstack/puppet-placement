@@ -32,16 +32,6 @@
 #   HTTPProxyToWSGI middleware.
 #   Defaults to $::os_service_default.
 #
-# DEPRECATED PARAMETERS
-#
-# [*host*]
-#   (optional) The placement api bind address.
-#   Defaults to undef
-#
-# [*port*]
-#   (optional) Th e placement api port.
-#   Defaults to undef
-#
 class placement::api (
   $enabled                      = true,
   $manage_service               = true,
@@ -49,9 +39,6 @@ class placement::api (
   $package_ensure               = 'present',
   $sync_db                      = false,
   $enable_proxy_headers_parsing = $::os_service_default,
-  # DEPRECATED PARAMETERS
-  $host                         = undef,
-  $port                         = undef,
 ) inherits placement::params {
 
   include placement::deps

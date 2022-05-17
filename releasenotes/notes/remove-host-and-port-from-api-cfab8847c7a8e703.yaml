@@ -1,0 +1,6 @@
+---
+upgrade:
+  - |
+    The ``host`` parameter and the ``port`` parameter were removed from
+    the ``placement::api`` class. These two parameters were deprecated and
+    had no effect.
