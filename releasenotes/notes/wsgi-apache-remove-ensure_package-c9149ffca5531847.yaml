@@ -1,0 +1,4 @@
+---
+upgrade:
+  - |
+    The ``placement::wsgi::apache::ensure_package`` parameter has been removed.

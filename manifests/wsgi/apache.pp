@@ -85,12 +85,6 @@
 #   directives to be placed at the end of the vhost configuration.
 #   Defaults to undef.
 #
-# DEPRECATED PARAMETERS
-#
-# [*ensure_package*]
-#   (Optional) Control the ensure parameter for the Placement API package ressource.
-#   Defaults to undef
-#
 # == Examples
 #
 #   include apache
@@ -118,16 +112,10 @@ class placement::wsgi::apache (
   $access_log_format         = false,
   $error_log_file            = undef,
   $vhost_custom_fragment     = undef,
-  # DEPRECATED PARAMETERS
-  $ensure_package            = undef,
 ) {
 
   include placement::deps
   include placement::params
-
-  if $ensure_package != undef {
-    warning('The placement::wsgi::apache::ensure_package parameter is deprecated and has no effect')
-  }
 
   Anchor['placement::install::end'] -> Class['apache']
 
