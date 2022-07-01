@@ -28,6 +28,8 @@ describe 'placement::wsgi::apache' do
         :wsgi_script_dir           => platform_params[:wsgi_script_path],
         :wsgi_script_file          => 'placement-api',
         :wsgi_script_source        => platform_params[:wsgi_script_source],
+        :headers                   => nil,
+        :request_headers           => nil,
         :access_log_file           => false,
         :access_log_format         => false,
         :error_log_file            => nil,
@@ -57,6 +59,8 @@ describe 'placement::wsgi::apache' do
           :access_log_file           => '/var/log/httpd/access_log',
           :access_log_format         => 'some format',
           :error_log_file            => '/var/log/httpd/error_log',
+          :headers                   => ['set X-XSS-Protection "1; mode=block"'],
+          :request_headers           => ['set Content-Type "application/json"'],
         }
       end
 
@@ -87,6 +91,8 @@ describe 'placement::wsgi::apache' do
         :wsgi_script_dir           => platform_params[:wsgi_script_path],
         :wsgi_script_file          => 'placement-api',
         :wsgi_script_source        => platform_params[:wsgi_script_source],
+        :headers                   => ['set X-XSS-Protection "1; mode=block"'],
+        :request_headers           => ['set Content-Type "application/json"'],
         :access_log_file           => params[:access_log_file],
         :access_log_format         => params[:access_log_format],
         :error_log_file            => params[:error_log_file],
