@@ -80,6 +80,14 @@
 #   (Optional) The error log file name for the virtualhost.
 #   Defaults to undef
 #
+# [*headers*]
+#   (optional) Headers for the vhost.
+#   Defaults to undef
+#
+# [*request_headers*]
+#   (optional) Modifies collected request headers in various ways.
+#   Defaults to undef
+#
 # [*vhost_custom_fragment*]
 #   (optional) Passes a string of custom configuration
 #   directives to be placed at the end of the vhost configuration.
@@ -111,6 +119,8 @@ class placement::wsgi::apache (
   $access_log_file           = false,
   $access_log_format         = false,
   $error_log_file            = undef,
+  $headers                   = undef,
+  $request_headers           = undef,
   $vhost_custom_fragment     = undef,
 ) {
 
@@ -144,6 +154,8 @@ class placement::wsgi::apache (
     wsgi_script_dir           => $::placement::params::wsgi_script_path,
     wsgi_script_file          => 'placement-api',
     wsgi_script_source        => $::placement::params::wsgi_script_source,
+    headers                   => $headers,
+    request_headers           => $request_headers,
     access_log_file           => $access_log_file,
     access_log_format         => $access_log_format,
     error_log_file            => $error_log_file,
