@@ -10,7 +10,7 @@ describe 'placement::wsgi::apache' do
         :bind_port                 => 8778,
         :group                     => 'placement',
         :path                      => '/',
-        :priority                  => '10',
+        :priority                  => 10,
         :servername                => facts[:fqdn],
         :ssl                       => false,
         :ssl_ca                    => nil,
@@ -30,8 +30,8 @@ describe 'placement::wsgi::apache' do
         :wsgi_script_source        => platform_params[:wsgi_script_source],
         :headers                   => nil,
         :request_headers           => nil,
-        :access_log_file           => false,
-        :access_log_format         => false,
+        :access_log_file           => nil,
+        :access_log_format         => nil,
         :error_log_file            => nil,
       )}
     end
@@ -55,7 +55,7 @@ describe 'placement::wsgi::apache' do
           :vhost_custom_fragment     => 'Timeout 99',
           :wsgi_process_display_name => 'custom',
           :threads                   => 5,
-          :priority                  => '25',
+          :priority                  => 25,
           :access_log_file           => '/var/log/httpd/access_log',
           :access_log_format         => 'some format',
           :error_log_file            => '/var/log/httpd/error_log',

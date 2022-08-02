@@ -48,7 +48,7 @@
 #
 # [*priority*]
 #   (Optional) The priority for the vhost.
-#   Defaults to '10'
+#   Defaults to 10
 #
 # [*threads*]
 #   (Optional) The number of threads for the vhost.
@@ -70,11 +70,11 @@
 #
 # [*access_log_file*]
 #   (Optional) The log file name for the virtualhost.
-#   Defaults to false
+#   Defaults to undef
 #
 # [*access_log_format*]
 #   (Optional) The log format for the virtualhost.
-#   Defaults to false
+#   Defaults to undef
 #
 # [*error_log_file*]
 #   (Optional) The error log file name for the virtualhost.
@@ -106,7 +106,7 @@ class placement::wsgi::apache (
   $path                      = '/',
   $ssl                       = false,
   $workers                   = $::os_workers,
-  $priority                  = '10',
+  $priority                  = 10,
   $threads                   = 1,
   $wsgi_process_display_name = undef,
   $ssl_cert                  = undef,
@@ -116,8 +116,8 @@ class placement::wsgi::apache (
   $ssl_crl_path              = undef,
   $ssl_crl                   = undef,
   $ssl_certs_dir             = undef,
-  $access_log_file           = false,
-  $access_log_format         = false,
+  $access_log_file           = undef,
+  $access_log_format         = undef,
   $error_log_file            = undef,
   $headers                   = undef,
   $request_headers           = undef,
