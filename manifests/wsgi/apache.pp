@@ -98,6 +98,14 @@
 #   (Optional) Sends the virtualhost error log messages to syslog.
 #   Defaults to undef.
 #
+# [*custom_wsgi_process_options*]
+#   (Optional) gives you the opportunity to add custom process options or to
+#   overwrite the default options for the WSGI main process.
+#   eg. to use a virtual python environment for the WSGI process
+#   you could set it to:
+#   { python-path => '/my/python/virtualenv' }
+#   Defaults to {}
+#
 # [*headers*]
 #   (optional) Headers for the vhost.
 #   Defaults to undef
@@ -118,32 +126,33 @@
 #   class { 'placement::wsgi::apache': }
 #
 class placement::wsgi::apache (
-  $servername                = $::fqdn,
-  $api_port                  = 8778,
-  $bind_host                 = undef,
-  $path                      = '/',
-  $ssl                       = false,
-  $workers                   = $::os_workers,
-  $priority                  = 10,
-  $threads                   = 1,
-  $wsgi_process_display_name = undef,
-  $ssl_cert                  = undef,
-  $ssl_key                   = undef,
-  $ssl_chain                 = undef,
-  $ssl_ca                    = undef,
-  $ssl_crl_path              = undef,
-  $ssl_crl                   = undef,
-  $ssl_certs_dir             = undef,
-  $access_log_file           = undef,
-  $access_log_pipe           = undef,
-  $access_log_syslog         = undef,
-  $access_log_format         = undef,
-  $error_log_file            = undef,
-  $error_log_pipe            = undef,
-  $error_log_syslog          = undef,
-  $headers                   = undef,
-  $request_headers           = undef,
-  $vhost_custom_fragment     = undef,
+  $servername                  = $::fqdn,
+  $api_port                    = 8778,
+  $bind_host                   = undef,
+  $path                        = '/',
+  $ssl                         = false,
+  $workers                     = $::os_workers,
+  $priority                    = 10,
+  $threads                     = 1,
+  $wsgi_process_display_name   = undef,
+  $ssl_cert                    = undef,
+  $ssl_key                     = undef,
+  $ssl_chain                   = undef,
+  $ssl_ca                      = undef,
+  $ssl_crl_path                = undef,
+  $ssl_crl                     = undef,
+  $ssl_certs_dir               = undef,
+  $access_log_file             = undef,
+  $access_log_pipe             = undef,
+  $access_log_syslog           = undef,
+  $access_log_format           = undef,
+  $error_log_file              = undef,
+  $error_log_pipe              = undef,
+  $error_log_syslog            = undef,
+  $custom_wsgi_process_options = {},
+  $headers                     = undef,
+  $request_headers             = undef,
+  $vhost_custom_fragment       = undef,
 ) {
 
   include placement::deps
@@ -152,39 +161,40 @@ class placement::wsgi::apache (
   Anchor['placement::install::end'] -> Class['apache']
 
   ::openstacklib::wsgi::apache { 'placement_wsgi':
-    bind_host                 => $bind_host,
-    bind_port                 => $api_port,
-    group                     => 'placement',
-    path                      => $path,
-    priority                  => $priority,
-    servername                => $servername,
-    ssl                       => $ssl,
-    ssl_ca                    => $ssl_ca,
-    ssl_cert                  => $ssl_cert,
-    ssl_certs_dir             => $ssl_certs_dir,
-    ssl_chain                 => $ssl_chain,
-    ssl_crl                   => $ssl_crl,
-    ssl_crl_path              => $ssl_crl_path,
-    ssl_key                   => $ssl_key,
-    threads                   => $threads,
-    user                      => 'placement',
-    vhost_custom_fragment     => $vhost_custom_fragment,
-    workers                   => $workers,
-    wsgi_daemon_process       => 'placement-api',
-    wsgi_process_display_name => $wsgi_process_display_name,
-    wsgi_process_group        => 'placement-api',
-    wsgi_script_dir           => $::placement::params::wsgi_script_path,
-    wsgi_script_file          => 'placement-api',
-    wsgi_script_source        => $::placement::params::wsgi_script_source,
-    headers                   => $headers,
-    request_headers           => $request_headers,
-    access_log_file           => $access_log_file,
-    access_log_pipe           => $access_log_pipe,
-    access_log_syslog         => $access_log_syslog,
-    access_log_format         => $access_log_format,
-    error_log_file            => $error_log_file,
-    error_log_pipe            => $error_log_pipe,
-    error_log_syslog          => $error_log_syslog,
+    bind_host                   => $bind_host,
+    bind_port                   => $api_port,
+    group                       => 'placement',
+    path                        => $path,
+    priority                    => $priority,
+    servername                  => $servername,
+    ssl                         => $ssl,
+    ssl_ca                      => $ssl_ca,
+    ssl_cert                    => $ssl_cert,
+    ssl_certs_dir               => $ssl_certs_dir,
+    ssl_chain                   => $ssl_chain,
+    ssl_crl                     => $ssl_crl,
+    ssl_crl_path                => $ssl_crl_path,
+    ssl_key                     => $ssl_key,
+    threads                     => $threads,
+    user                        => 'placement',
+    vhost_custom_fragment       => $vhost_custom_fragment,
+    workers                     => $workers,
+    wsgi_daemon_process         => 'placement-api',
+    wsgi_process_display_name   => $wsgi_process_display_name,
+    wsgi_process_group          => 'placement-api',
+    wsgi_script_dir             => $::placement::params::wsgi_script_path,
+    wsgi_script_file            => 'placement-api',
+    wsgi_script_source          => $::placement::params::wsgi_script_source,
+    headers                     => $headers,
+    request_headers             => $request_headers,
+    custom_wsgi_process_options => $custom_wsgi_process_options,
+    access_log_file             => $access_log_file,
+    access_log_pipe             => $access_log_pipe,
+    access_log_syslog           => $access_log_syslog,
+    access_log_format           => $access_log_format,
+    error_log_file              => $error_log_file,
+    error_log_pipe              => $error_log_pipe,
+    error_log_syslog            => $error_log_syslog,
   }
 
 }

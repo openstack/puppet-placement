@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The ``placement::wsgi::apache`` class now supports customizing wsgi process
+    options, by the new ``custom_wsgi_process_options`` parameter.
