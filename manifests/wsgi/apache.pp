@@ -70,15 +70,33 @@
 #
 # [*access_log_file*]
 #   (Optional) The log file name for the virtualhost.
-#   Defaults to undef
+#   Defaults to undef.
+#
+# [*access_log_pipe*]
+#   (Optional) Specifies a pipe where Apache sends access logs for
+#   the virtualhost.
+#   Defaults to undef.
+#
+# [*access_log_syslog*]
+#   (Optional) Sends the virtualhost access log messages to syslog.
+#   Defaults to undef.
 #
 # [*access_log_format*]
 #   (Optional) The log format for the virtualhost.
-#   Defaults to undef
+#   Defaults to undef.
 #
 # [*error_log_file*]
 #   (Optional) The error log file name for the virtualhost.
-#   Defaults to undef
+#   Defaults to undef.
+#
+# [*error_log_pipe*]
+#   (Optional) Specifies a pipe where Apache sends error logs for
+#   the virtualhost.
+#   Defaults to undef.
+#
+# [*error_log_syslog*]
+#   (Optional) Sends the virtualhost error log messages to syslog.
+#   Defaults to undef.
 #
 # [*headers*]
 #   (optional) Headers for the vhost.
@@ -117,8 +135,12 @@ class placement::wsgi::apache (
   $ssl_crl                   = undef,
   $ssl_certs_dir             = undef,
   $access_log_file           = undef,
+  $access_log_pipe           = undef,
+  $access_log_syslog         = undef,
   $access_log_format         = undef,
   $error_log_file            = undef,
+  $error_log_pipe            = undef,
+  $error_log_syslog          = undef,
   $headers                   = undef,
   $request_headers           = undef,
   $vhost_custom_fragment     = undef,
@@ -157,8 +179,12 @@ class placement::wsgi::apache (
     headers                   => $headers,
     request_headers           => $request_headers,
     access_log_file           => $access_log_file,
+    access_log_pipe           => $access_log_pipe,
+    access_log_syslog         => $access_log_syslog,
     access_log_format         => $access_log_format,
     error_log_file            => $error_log_file,
+    error_log_pipe            => $error_log_pipe,
+    error_log_syslog          => $error_log_syslog,
   }
 
 }
