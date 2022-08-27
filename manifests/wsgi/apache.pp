@@ -26,8 +26,8 @@
 #   (Optional) The servername for the virtualhost.
 #   Defaults to $::fqdn
 #
-# [*api_port*]
-#   (Optional) The port for Placement API service.
+# [*port*]
+#   (Optional) The port.
 #   Defaults to 8778
 #
 # [*bind_host*]
@@ -107,17 +107,27 @@
 #   Defaults to {}
 #
 # [*headers*]
-#   (optional) Headers for the vhost.
+#   (Optional) Headers for the vhost.
 #   Defaults to undef
 #
 # [*request_headers*]
-#   (optional) Modifies collected request headers in various ways.
+#   (Optional) Modifies collected request headers in various ways.
 #   Defaults to undef
 #
 # [*vhost_custom_fragment*]
-#   (optional) Passes a string of custom configuration
+#   (Optional) Passes a string of custom configuration
 #   directives to be placed at the end of the vhost configuration.
 #   Defaults to undef.
+#
+# DEPRECATED PARAMETERS
+#
+# [*api_port*]
+#   (Optional) The port for Placement API service.
+#   Defaults to undef
+#
+# == Dependencies
+#
+#   requires Class['apache'] & Class['placement']
 #
 # == Examples
 #
@@ -127,14 +137,11 @@
 #
 class placement::wsgi::apache (
   $servername                  = $::fqdn,
-  $api_port                    = 8778,
+  $port                        = 8778,
   $bind_host                   = undef,
   $path                        = '/',
   $ssl                         = false,
   $workers                     = $::os_workers,
-  $priority                    = 10,
-  $threads                     = 1,
-  $wsgi_process_display_name   = undef,
   $ssl_cert                    = undef,
   $ssl_key                     = undef,
   $ssl_chain                   = undef,
@@ -142,6 +149,9 @@ class placement::wsgi::apache (
   $ssl_crl_path                = undef,
   $ssl_crl                     = undef,
   $ssl_certs_dir               = undef,
+  $wsgi_process_display_name   = undef,
+  $threads                     = 1,
+  $priority                    = 10,
   $access_log_file             = undef,
   $access_log_pipe             = undef,
   $access_log_syslog           = undef,
@@ -153,6 +163,8 @@ class placement::wsgi::apache (
   $headers                     = undef,
   $request_headers             = undef,
   $vhost_custom_fragment       = undef,
+  # DEPRECATED PARAMETERS
+  $api_port                    = undef,
 ) {
 
   include placement::deps
@@ -160,9 +172,13 @@ class placement::wsgi::apache (
 
   Anchor['placement::install::end'] -> Class['apache']
 
+  if $api_port {
+    warning('The api_port parameter is deprecated. Use the port parameter')
+  }
+
   ::openstacklib::wsgi::apache { 'placement_wsgi':
     bind_host                   => $bind_host,
-    bind_port                   => $api_port,
+    bind_port                   => pick($api_port, $port),
     group                       => 'placement',
     path                        => $path,
     priority                    => $priority,
@@ -196,5 +212,4 @@ class placement::wsgi::apache (
     error_log_pipe              => $error_log_pipe,
     error_log_syslog            => $error_log_syslog,
   }
-
 }

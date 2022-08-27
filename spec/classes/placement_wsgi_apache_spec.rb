@@ -45,7 +45,7 @@ describe 'placement::wsgi::apache' do
         {
           :servername                  => 'dummy.host',
           :bind_host                   => '10.42.51.1',
-          :api_port                    => 12345,
+          :port                        => 12345,
           :path                        => '/custom',
           :ssl                         => true,
           :workers                     => 10,
@@ -72,7 +72,7 @@ describe 'placement::wsgi::apache' do
 
       it { should contain_openstacklib__wsgi__apache('placement_wsgi').with(
         :bind_host                   => params[:bind_host],
-        :bind_port                   => params[:api_port],
+        :bind_port                   => params[:port],
         :group                       => 'placement',
         :path                        => params[:path],
         :priority                    => params[:priority],
