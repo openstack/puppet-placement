@@ -119,12 +119,6 @@
 #   directives to be placed at the end of the vhost configuration.
 #   Defaults to undef.
 #
-# DEPRECATED PARAMETERS
-#
-# [*api_port*]
-#   (Optional) The port for Placement API service.
-#   Defaults to undef
-#
 # == Dependencies
 #
 #   requires Class['apache'] & Class['placement']
@@ -163,8 +157,6 @@ class placement::wsgi::apache (
   $headers                     = undef,
   $request_headers             = undef,
   $vhost_custom_fragment       = undef,
-  # DEPRECATED PARAMETERS
-  $api_port                    = undef,
 ) {
 
   include placement::deps
@@ -172,13 +164,9 @@ class placement::wsgi::apache (
 
   Anchor['placement::install::end'] -> Class['apache']
 
-  if $api_port {
-    warning('The api_port parameter is deprecated. Use the port parameter')
-  }
-
   ::openstacklib::wsgi::apache { 'placement_wsgi':
     bind_host                   => $bind_host,
-    bind_port                   => pick($api_port, $port),
+    bind_port                   => $port,
     group                       => 'placement',
     path                        => $path,
     priority                    => $priority,
