@@ -11,7 +11,7 @@ describe 'placement::wsgi::apache' do
         :group                     => 'placement',
         :path                      => '/',
         :priority                  => 10,
-        :servername                => facts[:fqdn],
+        :servername                => 'foo.example.com',
         :ssl                       => false,
         :ssl_ca                    => nil,
         :ssl_cert                  => nil,
@@ -174,14 +174,12 @@ describe 'placement::wsgi::apache' do
     context "on #{os}" do
       let (:facts) do
         facts.merge!(OSDefaults.get_facts({
-          :os_workers     => 42,
-          :concat_basedir => '/var/lib/puppet/concat',
-          :fqdn           => 'some.host.tld',
+          :os_workers => 42,
         }))
       end
 
       let(:platform_params) do
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'Debian'
           {
             :wsgi_script_path   => '/usr/lib/cgi-bin/placement',

@@ -14,24 +14,24 @@
 #
 # [*state_path*]
 #   (optional) Directory for storing state.
-#   Defaults to $::os_service_default
+#   Defaults to $facts['os_service_default']
 #
 # [*randomize_allocation_candidates*]
 #   (Optional) Randomize the results of the returned
 #   allocation candidates.
-#   Defaults to $::os_service_default
+#   Defaults to $facts['os_service_default']
 #
 # [*allocation_conflict_retry_count*]
 #   (Optional) The number of retries when confliction is detected in concurrent
 #   allocations.
-#   Defaults to $::os_service_default
+#   Defaults to $facts['os_service_default']
 #
 class placement(
   $ensure_package                  = 'present',
   $sync_db                         = true,
-  $state_path                      = $::os_service_default,
-  $randomize_allocation_candidates = $::os_service_default,
-  $allocation_conflict_retry_count = $::os_service_default,
+  $state_path                      = $facts['os_service_default'],
+  $randomize_allocation_candidates = $facts['os_service_default'],
+  $allocation_conflict_retry_count = $facts['os_service_default'],
 ) inherits placement::params {
 
   include placement::deps

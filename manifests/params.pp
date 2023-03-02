@@ -7,7 +7,7 @@ class placement::params {
 
   $group = 'placement'
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'RedHat': {
       # package names
       $package_name        = 'openstack-placement-api'
@@ -26,7 +26,7 @@ class placement::params {
       $common_package_name = 'placement-common'
       $python_package_name = 'python3-placement'
       $osc_package_name    = 'python3-osc-placement'
-      case $::operatingsystem {
+      case $facts['os']['name'] {
         'Debian': {
           $service_name    = 'placement-api'
         }
@@ -41,7 +41,7 @@ class placement::params {
       $wsgi_script_path    = '/usr/lib/cgi-bin/placement'
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} operatingsystem")
+      fail("Unsupported osfamily: ${facts['os']['family']}")
     }
-  } # Case $::osfamily
+  } # Case $facts['os']['family']
 }
