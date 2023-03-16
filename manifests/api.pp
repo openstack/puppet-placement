@@ -44,6 +44,10 @@ class placement::api (
   include placement::deps
   include placement::policy
 
+  validate_legacy(Boolean, 'validate_bool', $manage_service)
+  validate_legacy(Boolean, 'validate_bool', $enabled)
+  validate_legacy(Boolean, 'validate_bool', $sync_db)
+
   if $manage_service {
     if $api_service_name == 'httpd' {
       # The following logic is currently required only in Debian, because

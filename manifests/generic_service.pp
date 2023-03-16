@@ -41,6 +41,9 @@ define placement::generic_service(
   include placement::deps
   include placement::params
 
+  validate_legacy(Boolean, 'validate_bool', $manage_service)
+  validate_legacy(Boolean, 'validate_bool', $enabled)
+
   $placement_title = "placement-${name}"
 
   # I need to mark that ths package should be

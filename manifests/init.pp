@@ -36,6 +36,8 @@ class placement(
 
   include placement::deps
 
+  validate_legacy(Boolean, 'validate_bool', $sync_db)
+
   if $sync_db {
     include placement::db::sync
   }
