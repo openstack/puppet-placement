@@ -34,7 +34,7 @@
 #   Defaults to 'utf8_general_ci'
 #
 class placement::db::mysql(
-  $password,
+  String[1] $password,
   $dbname        = 'placement',
   $user          = 'placement',
   $host          = '127.0.0.1',
@@ -44,8 +44,6 @@ class placement::db::mysql(
 ) {
 
   include placement::deps
-
-  validate_legacy(String, 'validate_string', $password)
 
   ::openstacklib::db::mysql { 'placement':
     user          => $user,

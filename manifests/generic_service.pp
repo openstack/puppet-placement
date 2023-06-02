@@ -33,16 +33,13 @@
 define placement::generic_service(
   $package_name,
   $service_name,
-  $enabled        = true,
-  $manage_service = true,
-  $ensure_package = 'present'
+  Boolean $enabled        = true,
+  Boolean $manage_service = true,
+  $ensure_package         = 'present'
 ) {
 
   include placement::deps
   include placement::params
-
-  validate_legacy(Boolean, 'validate_bool', $manage_service)
-  validate_legacy(Boolean, 'validate_bool', $enabled)
 
   $placement_title = "placement-${name}"
 

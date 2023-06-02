@@ -21,11 +21,10 @@
 #   or Puppet catalog compilation will fail with duplicate resources.
 #
 class placement::config (
-  $placement_config = {},
+  Hash $placement_config = {},
 ) {
 
   include placement::deps
 
-  validate_legacy(Hash, 'validate_hash', $placement_config)
   create_resources('placement_config', $placement_config)
 }

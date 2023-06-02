@@ -28,15 +28,13 @@
 #
 class placement(
   $ensure_package                  = 'present',
-  $sync_db                         = true,
+  Boolean $sync_db                 = true,
   $state_path                      = $facts['os_service_default'],
   $randomize_allocation_candidates = $facts['os_service_default'],
   $allocation_conflict_retry_count = $facts['os_service_default'],
 ) inherits placement::params {
 
   include placement::deps
-
-  validate_legacy(Boolean, 'validate_bool', $sync_db)
 
   if $sync_db {
     include placement::db::sync
