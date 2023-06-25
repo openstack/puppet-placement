@@ -41,7 +41,7 @@ class placement::deps {
 
   # policy config should occur in the config block also.
   Anchor['placement::config::begin']
-  -> Openstacklib::Policy<||>
+  -> Openstacklib::Policy<| tag == 'placement' |>
   ~> Anchor['placement::config::end']
 
   # On any uwsgi config change, we must restart Placement.
