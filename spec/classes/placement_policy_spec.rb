@@ -33,6 +33,7 @@ describe 'placement::policy' do
           :file_group   => 'placement',
           :file_format  => 'yaml',
           :purge_config => false,
+          :tag          => 'placement',
         )
         is_expected.to contain_oslo__policy('placement_config').with(
           :enforce_scope        => false,
@@ -63,6 +64,7 @@ describe 'placement::policy' do
           :file_group   => 'placement',
           :file_format  => 'yaml',
           :purge_config => true,
+          :tag          => 'placement',
         )
         is_expected.to contain_oslo__policy('placement_config').with(
           :enforce_scope        => false,
