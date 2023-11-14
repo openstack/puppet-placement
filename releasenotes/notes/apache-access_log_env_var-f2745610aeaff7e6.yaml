@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The new ``placement::wsgi::apache::access_log_env_var`` parameter has been
+    added.
