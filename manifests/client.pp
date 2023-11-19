@@ -17,7 +17,7 @@ class placement::client(
   package { 'python-osc-placement':
     ensure => $ensure,
     name   => $::placement::params::osc_package_name,
-    tag    => ['openstack', 'placement-support-package'],
+    tag    => ['openstack', 'openstackclient'],
   }
 
   include 'openstacklib::openstackclient'
