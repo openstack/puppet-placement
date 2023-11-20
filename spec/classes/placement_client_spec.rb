@@ -11,7 +11,7 @@ describe 'placement::client' do
       is_expected.to contain_package('python-osc-placement').with(
         :ensure => 'present',
         :name   => platform_params[:client_package_name],
-        :tag    => ['openstack', 'placement-support-package']
+        :tag    => ['openstack', 'openstackclient']
       )
     end
 
