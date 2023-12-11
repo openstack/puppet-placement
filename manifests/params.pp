@@ -14,7 +14,7 @@ class placement::params {
       $common_package_name = 'openstack-placement-common'
       $python_package_name = 'python3-placement'
       $osc_package_name    = 'python3-osc-placement'
-      $service_name        = false
+      $service_name        = undef
       $public_url          = 'http://127.0.0.1/placement'
       $internal_url        = 'http://127.0.0.1/placement'
       $admin_url           = 'http://127.0.0.1/placement'
@@ -31,7 +31,7 @@ class placement::params {
           $service_name    = 'placement-api'
         }
         default: {
-          $service_name    = false
+          $service_name    = undef
         }
       }
       $public_url          = 'http://127.0.0.1'

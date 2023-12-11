@@ -81,11 +81,11 @@ describe 'placement::api' do
             { :service_name => 'placement-api',
               :package_name => 'placement-api'}
           else
-            { :service_name => false,
+            { :service_name => nil,
               :package_name => 'placement-api'}
           end
         when 'RedHat'
-          { :service_name => false,
+          { :service_name => nil,
             :package_name => 'openstack-placement-api'}
         end
       end
