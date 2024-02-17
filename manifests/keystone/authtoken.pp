@@ -279,4 +279,6 @@ class placement::keystone::authtoken(
       service_type                   => $service_type,
       interface                      => $interface;
   }
+
+  Keystone::Resource::Authtoken['placement_config'] -> Anchor['placement::config::end']
 }

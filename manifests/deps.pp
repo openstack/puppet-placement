@@ -24,30 +24,9 @@ class placement::deps {
   ~> Service<| tag == 'placement-service' |>
   ~> anchor { 'placement::service::end': }
 
-  # Support packages need to be installed in the install phase, but we don't
-  # put them in the chain above because we don't want any false dependencies
-  # between packages with the placement-package tag and the placement-support-package
-  # tag.  Note: the package resources here will have a 'before' relationship on
-  # the placement::install::end anchor.  The line between placement-support-package
-  # and placement-package should be whether or not placement services would
-  # need to be restarted if the package state was changed.
-  Anchor['placement::install::begin']
-  -> Package<| tag == 'placement-support-package'|>
-  -> Anchor['placement::install::end']
-
-  # all db settings should be applied and all packages should be installed
-  # before dbsync starts
-  Oslo::Db<||> -> Anchor['placement::dbsync::begin']
-
-  # policy config should occur in the config block also.
-  Anchor['placement::config::begin']
-  -> Openstacklib::Policy<| tag == 'placement' |>
-  -> Anchor['placement::config::end']
-
-  # On any uwsgi config change, we must restart Placement.
   Anchor['placement::config::begin']
   -> Placement_api_uwsgi_config<||>
-  ~> Anchor['placement::config::end']
+  -> Anchor['placement::config::end']
 
   # Installation or config changes will always restart services.
   Anchor['placement::install::end'] ~> Anchor['placement::service::begin']

@@ -65,10 +65,14 @@ class placement::policy (
     file_group   => $::placement::params::group,
     file_format  => 'yaml',
     purge_config => $purge_config,
-    tag          => 'placement',
   }
 
   create_resources('openstacklib::policy', { $policy_path => $policy_parameters })
+
+  # policy config should occur in the config block also.
+  Anchor['placement::config::begin']
+  -> Openstacklib::Policy[$policy_path]
+  -> Anchor['placement::config::end']
 
   oslo::policy { 'placement_config':
     enforce_scope        => $enforce_scope,
@@ -77,5 +81,4 @@ class placement::policy (
     policy_default_rule  => $policy_default_rule,
     policy_dirs          => $policy_dirs,
   }
-
 }

@@ -62,6 +62,9 @@ class placement::api (
       Service <| title == 'httpd' |> { tag +> 'placement-service' }
     } else {
       $api_service_name_real = $api_service_name
+
+      # On any uwsgi config change, we must restart Placement API.
+      Placement_api_uwsgi_config<||> ~> Service['placement-api']
     }
   } else {
     $api_service_name_real = $api_service_name
