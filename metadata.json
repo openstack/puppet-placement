@@ -61,5 +61,5 @@
     ],
     "source": "https://opendev.org/openstack/puppet-placement.git",
     "summary": "Puppet module for OpenStack Placement",
-    "version": "8.0.0"
+    "version": "8.0.1"
 }
