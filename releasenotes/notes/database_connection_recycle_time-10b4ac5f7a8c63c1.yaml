@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The new ``placement::db::database_connection_recycle_time`` parameter has
+    been added.

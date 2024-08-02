@@ -16,6 +16,10 @@
 #   (Optional) Connection url to connect to placement slave database (read-only).
 #   Defaults to $facts['os_service_default']
 #
+# [*database_connection_recycle_time*]
+#   Timeout when db connections should be reaped.
+#   (Optional) Defaults to $facts['os_service_default']
+#
 # [*database_mysql_sql_mode*]
 #   (Optional) The SQL mode to be used for MySQL sessions.
 #   Defaults to $facts['os_service_default']
@@ -55,36 +59,38 @@
 #   Defaults to $facts['os_service_default']
 #
 class placement::db (
-  $database_sqlite_synchronous = $facts['os_service_default'],
-  $database_connection         = 'sqlite:////var/lib/placement/placement.sqlite',
-  $database_slave_connection   = $facts['os_service_default'],
-  $database_mysql_sql_mode     = $facts['os_service_default'],
-  $database_max_pool_size      = $facts['os_service_default'],
-  $database_max_retries        = $facts['os_service_default'],
-  $database_retry_interval     = $facts['os_service_default'],
-  $database_max_overflow       = $facts['os_service_default'],
-  $database_connection_debug   = $facts['os_service_default'],
-  $database_connection_trace   = $facts['os_service_default'],
-  $database_pool_timeout       = $facts['os_service_default'],
-  $mysql_enable_ndb            = $facts['os_service_default'],
+  $database_sqlite_synchronous      = $facts['os_service_default'],
+  $database_connection              = 'sqlite:////var/lib/placement/placement.sqlite',
+  $database_slave_connection        = $facts['os_service_default'],
+  $database_connection_recycle_time = $facts['os_service_default'],
+  $database_mysql_sql_mode          = $facts['os_service_default'],
+  $database_max_pool_size           = $facts['os_service_default'],
+  $database_max_retries             = $facts['os_service_default'],
+  $database_retry_interval          = $facts['os_service_default'],
+  $database_max_overflow            = $facts['os_service_default'],
+  $database_connection_debug        = $facts['os_service_default'],
+  $database_connection_trace        = $facts['os_service_default'],
+  $database_pool_timeout            = $facts['os_service_default'],
+  $mysql_enable_ndb                 = $facts['os_service_default'],
 ) {
 
   include placement::deps
 
   oslo::db { 'placement_config':
-    config_group       => 'placement_database',
-    sqlite_synchronous => $database_sqlite_synchronous,
-    connection         => $database_connection,
-    slave_connection   => $database_slave_connection,
-    mysql_sql_mode     => $database_mysql_sql_mode,
-    max_pool_size      => $database_max_pool_size,
-    max_retries        => $database_max_retries,
-    retry_interval     => $database_retry_interval,
-    max_overflow       => $database_max_overflow,
-    connection_debug   => $database_connection_debug,
-    connection_trace   => $database_connection_trace,
-    pool_timeout       => $database_pool_timeout,
-    mysql_enable_ndb   => $mysql_enable_ndb,
+    config_group            => 'placement_database',
+    sqlite_synchronous      => $database_sqlite_synchronous,
+    connection              => $database_connection,
+    slave_connection        => $database_slave_connection,
+    connection_recycle_time => $database_connection_recycle_time,
+    mysql_sql_mode          => $database_mysql_sql_mode,
+    max_pool_size           => $database_max_pool_size,
+    max_retries             => $database_max_retries,
+    retry_interval          => $database_retry_interval,
+    max_overflow            => $database_max_overflow,
+    connection_debug        => $database_connection_debug,
+    connection_trace        => $database_connection_trace,
+    pool_timeout            => $database_pool_timeout,
+    mysql_enable_ndb        => $mysql_enable_ndb,
   }
 
   # all db settings should be applied and all packages should be installed
