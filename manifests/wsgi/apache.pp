@@ -167,7 +167,7 @@ class placement::wsgi::apache (
   ::openstacklib::wsgi::apache { 'placement_wsgi':
     bind_host                   => $bind_host,
     bind_port                   => $port,
-    group                       => 'placement',
+    group                       => $::placement::params::group,
     path                        => $path,
     priority                    => $priority,
     servername                  => $servername,
@@ -180,7 +180,7 @@ class placement::wsgi::apache (
     ssl_crl_path                => $ssl_crl_path,
     ssl_key                     => $ssl_key,
     threads                     => $threads,
-    user                        => 'placement',
+    user                        => $::placement::params::user,
     vhost_custom_fragment       => $vhost_custom_fragment,
     workers                     => $workers,
     wsgi_daemon_process         => 'placement-api',
