@@ -15,9 +15,6 @@ class placement::params {
       $python_package_name = 'python3-placement'
       $osc_package_name    = 'python3-osc-placement'
       $service_name        = undef
-      $public_url          = 'http://127.0.0.1/placement'
-      $internal_url        = 'http://127.0.0.1/placement'
-      $admin_url           = 'http://127.0.0.1/placement'
       $wsgi_script_source  = '/usr/bin/placement-api'
       $wsgi_script_path    = '/var/www/cgi-bin/placement'
     }
@@ -34,9 +31,6 @@ class placement::params {
           $service_name    = undef
         }
       }
-      $public_url          = 'http://127.0.0.1'
-      $internal_url        = 'http://127.0.0.1'
-      $admin_url           = 'http://127.0.0.1'
       $wsgi_script_source  = '/usr/bin/placement-api'
       $wsgi_script_path    = '/usr/lib/cgi-bin/placement'
     }
