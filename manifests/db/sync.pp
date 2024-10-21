@@ -12,11 +12,12 @@ class placement::db::sync(
 ) {
 
   include placement::deps
+  include placement::params
 
   exec { 'placement-manage-db-sync':
     command     => 'placement-manage db sync',
     path        => ['/bin', '/usr/bin', '/usr/local/bin'],
-    user        => 'placement',
+    user        => $::placement::params::user,
     refreshonly => true,
     try_sleep   => 5,
     tries       => 10,

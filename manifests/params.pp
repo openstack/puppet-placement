@@ -5,6 +5,7 @@ class placement::params {
   include placement::deps
   include openstacklib::defaults
 
+  $user  = 'placement'
   $group = 'placement'
 
   case $facts['os']['family'] {
