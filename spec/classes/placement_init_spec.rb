@@ -23,16 +23,18 @@ describe 'placement' do
 
       it { should contain_placement_config('placement/randomize_allocation_candidates').with_value('<SERVICE DEFAULT>') }
       it { should contain_placement_config('placement/allocation_conflict_retry_count').with_value('<SERVICE DEFAULT>') }
+      it { should contain_placement_config('placement/allocation_candidates_generation_strategy').with_value('<SERVICE DEFAULT>') }
     end
 
     context 'with overridden parameters' do
       let :params do
         {
-          :ensure_package                  => 'absent',
-          :sync_db                         => false,
-          :state_path                      => '/var/lib/placement',
-          :randomize_allocation_candidates => true,
-          :allocation_conflict_retry_count => 10,
+          :ensure_package                            => 'absent',
+          :sync_db                                   => false,
+          :state_path                                => '/var/lib/placement',
+          :randomize_allocation_candidates           => true,
+          :allocation_conflict_retry_count           => 10,
+          :allocation_candidates_generation_strategy => 'depth-first',
         }
       end
 
@@ -57,6 +59,7 @@ describe 'placement' do
       it { should contain_placement_config('DEFAULT/state_path').with_value('/var/lib/placement') }
       it { should contain_placement_config('placement/randomize_allocation_candidates').with_value(true) }
       it { should contain_placement_config('placement/allocation_conflict_retry_count').with_value(10) }
+      it { should contain_placement_config('placement/allocation_candidates_generation_strategy').with_value('depth-first') }
     end
   end
 

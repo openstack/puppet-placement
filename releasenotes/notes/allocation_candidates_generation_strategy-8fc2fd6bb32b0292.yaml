@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The new ``placement::allocation_candidates_generation_strategy`` parameter
+    has been added.
