@@ -45,7 +45,7 @@ class placement::db::mysql(
 
   include placement::deps
 
-  ::openstacklib::db::mysql { 'placement':
+  openstacklib::db::mysql { 'placement':
     user          => $user,
     password      => $password,
     dbname        => $dbname,

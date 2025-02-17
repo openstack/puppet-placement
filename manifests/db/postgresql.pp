@@ -34,7 +34,7 @@ class placement::db::postgresql(
 
   include placement::deps
 
-  ::openstacklib::db::postgresql { 'placement':
+  openstacklib::db::postgresql { 'placement':
     password   => $password,
     dbname     => $dbname,
     user       => $user,

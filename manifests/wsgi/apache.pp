@@ -164,7 +164,7 @@ class placement::wsgi::apache (
 
   Anchor['placement::install::end'] -> Class['apache']
 
-  ::openstacklib::wsgi::apache { 'placement_wsgi':
+  openstacklib::wsgi::apache { 'placement_wsgi':
     bind_host                   => $bind_host,
     bind_port                   => $port,
     group                       => $::placement::params::group,
