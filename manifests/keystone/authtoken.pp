@@ -239,7 +239,7 @@ class placement::keystone::authtoken(
 
   keystone::resource::authtoken {
     'placement_config':
-      *                              => $params;
+      * => $params;
     default:
       username                       => $username,
       password                       => $password,
