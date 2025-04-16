@@ -29,7 +29,6 @@ describe 'placement::logging' do
      :syslog_log_facility            => 'LOG_FOO',
      :log_dir                        => '/var/log',
      :log_file                       => '/var/tmp/placement_random.log',
-     :watch_log_file                 => true,
      :debug                          => true,
     }
   end
@@ -82,7 +81,6 @@ describe 'placement::logging' do
       :syslog_log_facility => 'LOG_FOO',
       :log_dir             => '/var/log',
       :log_file            => '/var/tmp/placement_random.log',
-      :watch_log_file      => true,
       :debug               => true,
     )}
   end
