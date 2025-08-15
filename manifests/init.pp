@@ -48,13 +48,13 @@ class placement(
 
   package { 'python-placement':
     ensure => $ensure_package,
-    name   => $::placement::params::python_package_name,
+    name   => $placement::params::python_package_name,
     tag    => ['openstack', 'placement-package'],
   }
 
   package { 'placement-common':
     ensure  => $ensure_package,
-    name    => $::placement::params::common_package_name,
+    name    => $placement::params::common_package_name,
     require => Package['python-placement'],
     tag     => ['openstack', 'placement-package'],
   }

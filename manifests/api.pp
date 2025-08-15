@@ -17,7 +17,7 @@
 #   service, and you must use another class to configure that
 #   web service. For example, use class { 'placement::wsgi::apache'...}
 #   to make placement-api be a web app using apache mod_wsgi.
-#   Defaults to $::placement::params::service_name
+#   Defaults to $placement::params::service_name
 #
 # [*package_ensure*]
 #   (optional) ensure state for package.
@@ -35,7 +35,7 @@
 class placement::api (
   Boolean $enabled              = true,
   Boolean $manage_service       = true,
-  $api_service_name             = $::placement::params::service_name,
+  $api_service_name             = $placement::params::service_name,
   $package_ensure               = 'present',
   Boolean $sync_db              = false,
   $enable_proxy_headers_parsing = $facts['os_service_default'],
@@ -49,10 +49,10 @@ class placement::api (
       # The following logic is currently required only in Debian, because
       # the other distributions don't provide an independent service for
       # placement
-      if $::placement::params::service_name {
+      if $placement::params::service_name {
         service { 'placement-api':
           ensure => 'stopped',
-          name   => $::placement::params::service_name,
+          name   => $placement::params::service_name,
           enable => false,
           tag    => ['placement-service'],
         }
@@ -72,7 +72,7 @@ class placement::api (
 
   placement::generic_service { 'api':
     service_name   => $api_service_name_real,
-    package_name   => $::placement::params::package_name,
+    package_name   => $placement::params::package_name,
     manage_service => $manage_service,
     enabled        => $enabled,
     ensure_package => $package_ensure,
