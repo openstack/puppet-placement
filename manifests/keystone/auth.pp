@@ -102,7 +102,6 @@ class placement::keystone::auth (
   Keystone::EndpointUrl $admin_url        = 'http://127.0.0.1:8778',
   Keystone::EndpointUrl $internal_url     = 'http://127.0.0.1:8778',
 ) {
-
   include placement::deps
 
   Keystone::Resource::Service_identity['placement'] -> Anchor['placement::service::end']
@@ -128,5 +127,4 @@ class placement::keystone::auth (
     internal_url        => $internal_url,
     admin_url           => $admin_url,
   }
-
 }

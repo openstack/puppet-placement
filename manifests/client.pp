@@ -8,7 +8,7 @@
 #   (optional) The state for the placement client package
 #   Defaults to 'present'
 #
-class placement::client(
+class placement::client (
   $ensure = 'present'
 ) {
   include placement::deps
@@ -20,5 +20,5 @@ class placement::client(
     tag    => ['openstack', 'openstackclient'],
   }
 
-  include 'openstacklib::openstackclient'
+  include openstacklib::openstackclient
 }

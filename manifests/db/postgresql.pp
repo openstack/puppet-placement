@@ -24,14 +24,13 @@
 #   (Optional) Privileges given to the database user.
 #   Default to 'ALL'
 #
-class placement::db::postgresql(
+class placement::db::postgresql (
   $password,
   $dbname     = 'placement',
   $user       = 'placement',
   $encoding   = undef,
   $privileges = 'ALL',
 ) {
-
   include placement::deps
 
   openstacklib::db::postgresql { 'placement':
@@ -45,5 +44,4 @@ class placement::db::postgresql(
   Anchor['placement::db::begin']
   ~> Class['placement::db::postgresql']
   ~> Anchor['placement::db::end']
-
 }

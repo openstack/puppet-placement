@@ -31,5 +31,4 @@ class placement::deps {
   # Installation or config changes will always restart services.
   Anchor['placement::install::end'] ~> Anchor['placement::service::begin']
   Anchor['placement::config::end']  ~> Anchor['placement::service::begin']
-
 }

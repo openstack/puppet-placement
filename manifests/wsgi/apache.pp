@@ -158,7 +158,6 @@ class placement::wsgi::apache (
   $request_headers             = undef,
   $vhost_custom_fragment       = undef,
 ) {
-
   include placement::deps
   include placement::params
 
