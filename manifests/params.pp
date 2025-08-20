@@ -5,6 +5,8 @@ class placement::params {
   include placement::deps
   include openstacklib::defaults
 
+  $pyver3 = $openstacklib::defaults::pyver3
+
   $user  = 'placement'
   $group = 'placement'
 
@@ -16,7 +18,7 @@ class placement::params {
       $python_package_name = 'python3-placement'
       $osc_package_name    = 'python3-osc-placement'
       $service_name        = undef
-      $wsgi_script_source  = '/usr/bin/placement-api'
+      $wsgi_script_source  = "/usr/lib/python${pyver3}/site-packages/placement/wsgi/api.py"
       $wsgi_script_path    = '/var/www/cgi-bin/placement'
     }
     'Debian': {

@@ -188,7 +188,7 @@ describe 'placement::wsgi::apache' do
         when 'RedHat'
           {
             :wsgi_script_path   => '/var/www/cgi-bin/placement',
-            :wsgi_script_source => '/usr/bin/placement-api',
+            :wsgi_script_source => '/usr/lib/python3.9/site-packages/placement/wsgi/api.py',
           }
         end
       end
