@@ -33,7 +33,7 @@
 #   Only used with mysql modules >= 2.2.
 #   Defaults to 'utf8_general_ci'
 #
-class placement::db::mysql(
+class placement::db::mysql (
   String[1] $password,
   $dbname        = 'placement',
   $user          = 'placement',
@@ -42,7 +42,6 @@ class placement::db::mysql(
   $collate       = 'utf8_general_ci',
   $allowed_hosts = undef
 ) {
-
   include placement::deps
 
   openstacklib::db::mysql { 'placement':
@@ -58,5 +57,4 @@ class placement::db::mysql(
   Anchor['placement::db::begin']
   ~> Class['placement::db::mysql']
   ~> Anchor['placement::db::end']
-
 }

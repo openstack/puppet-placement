@@ -23,7 +23,6 @@
 class placement::config (
   Hash $placement_config = {},
 ) {
-
   include placement::deps
 
   create_resources('placement_config', $placement_config)

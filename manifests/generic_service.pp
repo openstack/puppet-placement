@@ -30,14 +30,13 @@
 #   (Optional) Control the ensure parameter for the package resource.
 #   Defaults to 'present'.
 #
-define placement::generic_service(
+define placement::generic_service (
   $package_name,
   $service_name,
   Boolean $enabled        = true,
   Boolean $manage_service = true,
   $ensure_package         = 'present'
 ) {
-
   include placement::deps
   include placement::params
 

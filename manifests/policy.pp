@@ -54,7 +54,6 @@ class placement::policy (
   $policy_dirs          = $facts['os_service_default'],
   Boolean $purge_config = false,
 ) {
-
   include placement::deps
   include placement::params
 

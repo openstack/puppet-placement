@@ -40,7 +40,6 @@ class placement::api (
   Boolean $sync_db              = false,
   $enable_proxy_headers_parsing = $facts['os_service_default'],
 ) inherits placement::params {
-
   include placement::deps
   include placement::policy
 

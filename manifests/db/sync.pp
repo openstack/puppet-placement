@@ -7,10 +7,9 @@
 #   (Optional) Timeout for the execution of the db_sync
 #   Defaults to 300
 #
-class placement::db::sync(
+class placement::db::sync (
   $db_sync_timeout = 300,
 ) {
-
   include placement::deps
   include placement::params
 

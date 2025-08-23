@@ -1,8 +1,6 @@
 # Parameters for puppet-placement
 #
 class placement::params {
-
-  include placement::deps
   include openstacklib::defaults
 
   $pyver3 = $openstacklib::defaults::pyver3

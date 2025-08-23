@@ -31,7 +31,7 @@
 #   allocation candidate generation.
 #   Defaults to $facts['os_service_default']
 #
-class placement(
+class placement (
   $ensure_package                            = 'present',
   Boolean $sync_db                           = true,
   $state_path                                = $facts['os_service_default'],
@@ -39,7 +39,6 @@ class placement(
   $allocation_conflict_retry_count           = $facts['os_service_default'],
   $allocation_candidates_generation_strategy = $facts['os_service_default'],
 ) inherits placement::params {
-
   include placement::deps
 
   if $sync_db {
