@@ -25,11 +25,11 @@ describe 'placement::api' do
 
     context 'with package_ensure parameter provided' do
       let :params do
-        { :package_ensure => false }
+        { :package_ensure => 'latest' }
       end
 
       it { should contain_placement__generic_service('api').with(
-        :ensure_package => false,
+        :ensure_package => 'latest',
       ) }
     end
 

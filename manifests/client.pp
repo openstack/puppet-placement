@@ -9,7 +9,7 @@
 #   Defaults to 'present'
 #
 class placement::client (
-  $ensure = 'present'
+  Stdlib::Ensure::Package $ensure = 'present'
 ) {
   include placement::deps
   include placement::params
