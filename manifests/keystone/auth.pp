@@ -83,7 +83,7 @@
 #
 class placement::keystone::auth (
   String[1] $password,
-  String[1] $ensure                       = 'present',
+  Enum['present', 'absent'] $ensure       = 'present',
   String[1] $auth_name                    = 'placement',
   String[1] $email                        = 'placement@localhost',
   String[1] $tenant                       = 'services',
