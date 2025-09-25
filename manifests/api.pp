@@ -19,7 +19,7 @@
 #   to make placement-api be a web app using apache mod_wsgi.
 #   Defaults to $placement::params::service_name
 #
-# [*package_ensure*]
+# [*ensure_package*]
 #   (optional) ensure state for package.
 #   Defaults to 'present'
 #
@@ -32,16 +32,32 @@
 #   HTTPProxyToWSGI middleware.
 #   Defaults to $facts['os_service_default'].
 #
+# DEPRECATED PARAMETERS
+#
+# [*package_ensure*]
+#   (optional) ensure state for package.
+#   Defaults to undef
+#
 class placement::api (
   Boolean $enabled                        = true,
   Boolean $manage_service                 = true,
   $api_service_name                       = $placement::params::service_name,
-  Stdlib::Ensure::Package $package_ensure = 'present',
+  Stdlib::Ensure::Package $ensure_package = 'present',
   Boolean $sync_db                        = false,
   $enable_proxy_headers_parsing           = $facts['os_service_default'],
+  # DEPRECATED PARAMETERS
+  Optional[Stdlib::Ensure::Package] $package_ensure = undef,
 ) inherits placement::params {
   include placement::deps
   include placement::policy
+
+  if $package_ensure {
+    warning('The package_ensure parameter is deprecated. Use the ensure_package parameter instead.')
+  }
+  $ensure_package_real = $package_ensure ? {
+    undef   => $ensure_package,
+    default => $package_ensure,
+  }
 
   if $manage_service {
     if $api_service_name == 'httpd' {
@@ -74,7 +90,7 @@ class placement::api (
     package_name   => $placement::params::package_name,
     manage_service => $manage_service,
     enabled        => $enabled,
-    ensure_package => $package_ensure,
+    ensure_package => $ensure_package_real,
   }
 
   if $sync_db {
