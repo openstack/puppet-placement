@@ -32,7 +32,7 @@
 #   Defaults to $facts['os_service_default']
 #
 class placement (
-  $ensure_package                            = 'present',
+  Stdlib::Ensure::Package $ensure_package    = 'present',
   Boolean $sync_db                           = true,
   $state_path                                = $facts['os_service_default'],
   $randomize_allocation_candidates           = $facts['os_service_default'],

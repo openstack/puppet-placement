@@ -33,12 +33,12 @@
 #   Defaults to $facts['os_service_default'].
 #
 class placement::api (
-  Boolean $enabled              = true,
-  Boolean $manage_service       = true,
-  $api_service_name             = $placement::params::service_name,
-  $package_ensure               = 'present',
-  Boolean $sync_db              = false,
-  $enable_proxy_headers_parsing = $facts['os_service_default'],
+  Boolean $enabled                        = true,
+  Boolean $manage_service                 = true,
+  $api_service_name                       = $placement::params::service_name,
+  Stdlib::Ensure::Package $package_ensure = 'present',
+  Boolean $sync_db                        = false,
+  $enable_proxy_headers_parsing           = $facts['os_service_default'],
 ) inherits placement::params {
   include placement::deps
   include placement::policy
