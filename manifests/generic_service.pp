@@ -13,10 +13,12 @@
 # === Parameters:
 #
 # [*package_name*]
-#   (Required) The package name (for the generic_service)
+#   (Optional) The package name (for the generic_service)
+#   Defaults to undef.
 #
 # [*service_name*]
-#   (Required) The service name (for the generic_service)
+#   (Optional) The service name (for the generic_service)
+#   Defaults to undef.
 #
 # [*enabled*]
 #   (Optional) Define if the service must be enabled or not
@@ -31,8 +33,8 @@
 #   Defaults to 'present'.
 #
 define placement::generic_service (
-  $package_name,
-  $service_name,
+  Optional[String[1]] $package_name       = undef,
+  Optional[String[1]] $service_name       = undef,
   Boolean $enabled                        = true,
   Boolean $manage_service                 = true,
   Stdlib::Ensure::Package $ensure_package = 'present'
@@ -44,13 +46,11 @@ define placement::generic_service (
 
   # I need to mark that ths package should be
   # installed before placement_config
-  if ($package_name) {
-    if !defined(Package[$placement_title]) and !defined(Package[$package_name]) {
-      package { $placement_title:
-        ensure => $ensure_package,
-        name   => $package_name,
-        tag    => ['openstack', 'placement-package'],
-      }
+  if $package_name {
+    package { $placement_title:
+      ensure => $ensure_package,
+      name   => $package_name,
+      tag    => ['openstack', 'placement-package'],
     }
   }
 

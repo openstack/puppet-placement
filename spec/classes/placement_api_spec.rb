@@ -2,16 +2,22 @@ require 'spec_helper'
 
 describe 'placement::api' do
   shared_examples 'placement::api' do
+    let :params do
+      { :api_service_name => 'httpd'}
+    end
 
-    context 'with only required params' do
-      let :params do
-        {}
-      end
+    let :pre_condition do
+      <<-EOS
+      include apache
+      include placement::wsgi::apache
+EOS
+    end
 
+    context 'with defaults' do
       it { should contain_class('placement::deps') }
       it { should contain_class('placement::policy') }
       it { should contain_placement__generic_service('api').with(
-        :service_name   => platform_params[:service_name],
+        :service_name   => nil,
         :package_name   => platform_params[:package_name],
         :manage_service => true,
         :enabled        => true,
@@ -24,8 +30,8 @@ describe 'placement::api' do
     end
 
     context 'with ensure_package parameter provided' do
-      let :params do
-        { :ensure_package => 'latest' }
+      before :each do
+        params.merge!({ :ensure_package => 'latest' })
       end
 
       it { should contain_placement__generic_service('api').with(
@@ -34,8 +40,8 @@ describe 'placement::api' do
     end
 
     context 'with manage_service parameter provided' do
-      let :params do
-        { :manage_service => false }
+      before :each do
+        params.merge!({ :manage_service => false })
       end
 
       it { should contain_placement__generic_service('api').with(
@@ -44,20 +50,34 @@ describe 'placement::api' do
     end
 
     context 'with sync_db parameter provided' do
-      let :params do
-        { :sync_db => true }
+      before :each do
+        params.merge!({ :sync_db => true })
       end
 
       it { should contain_class('placement::db::sync') }
     end
 
     context 'with enable_proxy_headers_parsing set' do
-      let :params do
-        { :enable_proxy_headers_parsing => true }
+      before :each do
+        params.merge!({ :enable_proxy_headers_parsing => true })
       end
 
       it { should contain_oslo__middleware('placement_config').with(
         :enable_proxy_headers_parsing => true,
+      ) }
+    end
+  end
+
+  shared_examples 'placement::api in Debian' do
+    context 'with defaults' do
+      it { should contain_class('placement::deps') }
+      it { should contain_class('placement::policy') }
+      it { should contain_placement__generic_service('api').with(
+        :service_name   => platform_params[:service_name],
+        :package_name   => platform_params[:package_name],
+        :manage_service => true,
+        :enabled        => true,
+        :ensure_package => 'present',
       ) }
     end
   end
@@ -91,6 +111,9 @@ describe 'placement::api' do
       end
 
       it_behaves_like 'placement::api'
+      if facts[:os]['name'] == 'Debian'
+        it_behaves_like 'placement::api in Debian'
+      end
     end
   end
 end
