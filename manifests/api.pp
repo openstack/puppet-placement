@@ -41,7 +41,7 @@
 class placement::api (
   Boolean $enabled                        = true,
   Boolean $manage_service                 = true,
-  $api_service_name                       = $placement::params::service_name,
+  String[1] $api_service_name             = $placement::params::service_name,
   Stdlib::Ensure::Package $ensure_package = 'present',
   Boolean $sync_db                        = false,
   $enable_proxy_headers_parsing           = $facts['os_service_default'],
@@ -60,29 +60,31 @@ class placement::api (
   }
 
   if $manage_service {
-    if $api_service_name == 'httpd' {
-      # The following logic is currently required only in Debian, because
-      # the other distributions don't provide an independent service for
-      # placement
-      if $placement::params::service_name {
-        service { 'placement-api':
-          ensure => 'stopped',
-          name   => $placement::params::service_name,
-          enable => false,
-          tag    => ['placement-service'],
-        }
-        Service['placement-api'] -> Service[$api_service_name]
-      }
-      $api_service_name_real = false
-      Service <| title == 'httpd' |> { tag +> 'placement-service' }
-    } else {
-      $api_service_name_real = $api_service_name
+    case $api_service_name {
+      'httpd': {
+        Service <| title == 'httpd' |> { tag +> 'placement-service' }
 
-      # On any uwsgi config change, we must restart Placement API.
-      Placement_api_uwsgi_config<||> ~> Service['placement-api']
+        if $placement::params::service_name {
+          service { 'placement-api':
+            ensure => 'stopped',
+            name   => $placement::params::service_name,
+            enable => false,
+            tag    => ['placement-service'],
+          }
+          Service['placement-api'] -> Service['httpd']
+        }
+
+        $api_service_name_real = undef
+      }
+      default: {
+        $api_service_name_real = $api_service_name
+
+        # On any uwsgi config change, we must restart Placement API.
+        Placement_api_uwsgi_config<||> ~> Service['placement-api']
+      }
     }
   } else {
-    $api_service_name_real = $api_service_name
+    $api_service_name_real = undef
   }
 
   placement::generic_service { 'api':

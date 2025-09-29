@@ -25,11 +25,11 @@ class placement::params {
       $python_package_name = 'python3-placement'
       $osc_package_name    = 'python3-osc-placement'
       case $facts['os']['name'] {
-        'Debian': {
-          $service_name    = 'placement-api'
+        'Ubuntu': {
+          $service_name = undef
         }
         default: {
-          $service_name    = undef
+          $service_name = 'placement-api'
         }
       }
       $wsgi_script_source  = '/usr/bin/placement-api'
