@@ -3,7 +3,7 @@
 class placement::params {
   include openstacklib::defaults
 
-  $pyver3 = $openstacklib::defaults::pyver3
+  $pybasedir = $openstacklib::defaults::pybasedir
 
   $user  = 'placement'
   $group = 'placement'
@@ -16,8 +16,8 @@ class placement::params {
       $python_package_name = 'python3-placement'
       $osc_package_name    = 'python3-osc-placement'
       $service_name        = undef
-      $wsgi_script_source  = "/usr/lib/python${pyver3}/site-packages/placement/wsgi/api.py"
       $wsgi_script_path    = '/var/www/cgi-bin/placement'
+      $wsgi_script_source  = "${pybasedir}/placement/wsgi/api.py"
     }
     'Debian': {
       $package_name        = 'placement-api'
@@ -32,8 +32,8 @@ class placement::params {
           $service_name = 'placement-api'
         }
       }
-      $wsgi_script_source  = '/usr/bin/placement-api'
       $wsgi_script_path    = '/usr/lib/cgi-bin/placement'
+      $wsgi_script_source  = "${pybasedir}/placement/wsgi/api.py"
     }
     default: {
       fail("Unsupported osfamily: ${facts['os']['family']}")

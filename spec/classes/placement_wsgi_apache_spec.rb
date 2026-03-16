@@ -183,7 +183,7 @@ describe 'placement::wsgi::apache' do
         when 'Debian'
           {
             :wsgi_script_path   => '/usr/lib/cgi-bin/placement',
-            :wsgi_script_source => '/usr/bin/placement-api',
+            :wsgi_script_source => '/usr/lib/python3/dist-packages/placement/wsgi/api.py',
           }
         when 'RedHat'
           {
