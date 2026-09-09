@@ -53,10 +53,12 @@
 #   (Optional) If set, use this value for pool_timeout with SQLAlchemy.
 #   Defaults to $facts['os_service_default']
 #
+# DEPRECATED PARAMETERS
+#
 # [*mysql_enable_ndb*]
 #   (Optional) If True, transparently enables support for handling MySQL
 #   Cluster (NDB).
-#   Defaults to $facts['os_service_default']
+#   Defaults to undef
 #
 class placement::db (
   $database_sqlite_synchronous      = $facts['os_service_default'],
@@ -71,7 +73,8 @@ class placement::db (
   $database_connection_debug        = $facts['os_service_default'],
   $database_connection_trace        = $facts['os_service_default'],
   $database_pool_timeout            = $facts['os_service_default'],
-  $mysql_enable_ndb                 = $facts['os_service_default'],
+  # DEPRECATED PARAMETERS
+  $mysql_enable_ndb                 = undef,
 ) {
   include placement::deps
 
