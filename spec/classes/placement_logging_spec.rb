@@ -67,7 +67,7 @@ describe 'placement::logging' do
       :use_stderr          => '<SERVICE DEFAULT>',
       :syslog_log_facility => '<SERVICE DEFAULT>',
       :log_dir             => '/var/log/placement',
-      :log_file            => '/var/log/placement/placement.log',
+      :log_file            => '<SERVICE DEFAULT>',
       :debug               => '<SERVICE DEFAULT>',
     )}
   end

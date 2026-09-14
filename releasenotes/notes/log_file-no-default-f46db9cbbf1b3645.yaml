@@ -1,0 +1,6 @@
+---
+upgrade:
+  - |
+    The ``placement::logging::log_file`` parameter now defaults to
+    the ``os_service_default`` fact, to name log files according to program
+    names.
