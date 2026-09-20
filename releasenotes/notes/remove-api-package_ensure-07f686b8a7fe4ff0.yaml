@@ -1,0 +1,5 @@
+---
+upgrade:
+  - |
+    The deprecated ``placement::api::package_ensure`` parameter has been
+    removed. Use the ``ensure_package`` parameter instead.
