@@ -32,12 +32,6 @@
 #   HTTPProxyToWSGI middleware.
 #   Defaults to $facts['os_service_default'].
 #
-# DEPRECATED PARAMETERS
-#
-# [*package_ensure*]
-#   (optional) ensure state for package.
-#   Defaults to undef
-#
 class placement::api (
   Boolean $enabled                        = true,
   Boolean $manage_service                 = true,
@@ -45,19 +39,9 @@ class placement::api (
   Stdlib::Ensure::Package $ensure_package = 'present',
   Boolean $sync_db                        = false,
   $enable_proxy_headers_parsing           = $facts['os_service_default'],
-  # DEPRECATED PARAMETERS
-  Optional[Stdlib::Ensure::Package] $package_ensure = undef,
 ) inherits placement::params {
   include placement::deps
   include placement::policy
-
-  if $package_ensure {
-    warning('The package_ensure parameter is deprecated. Use the ensure_package parameter instead.')
-  }
-  $ensure_package_real = $package_ensure ? {
-    undef   => $ensure_package,
-    default => $package_ensure,
-  }
 
   if $manage_service {
     case $api_service_name {
@@ -92,7 +76,7 @@ class placement::api (
     package_name   => $placement::params::package_name,
     manage_service => $manage_service,
     enabled        => $enabled,
-    ensure_package => $ensure_package_real,
+    ensure_package => $ensure_package,
   }
 
   if $sync_db {
